@@ -1,0 +1,69 @@
+feature,area,priority,original,clone,notes
+Service and destination entry points,discovery,must,yes,yes,S01 S06 S10; 2026-10-30 scope: car rentals and Things to do only; retired drivers and boats removed from discovery and new requests.
+Car search with city and date range,search,must,yes,yes,S01 S02; default search also permits blank filters | Build: City/date search and handoff to booking forms; request-based availability.
+Separate return city,search,must,yes,yes,S01 S03; homepage drop-off city persists through results into the request form; route surcharge still requires a provider quote.
+Car filters by type brand transmission and fuel,search,must,yes,partial,S02; controls observed but successful filtered result unverified | Build: Transmission and fuel filters; brand/type filters not implemented.
+Price range and reset filters,search,must,yes,partial,S02; control behavior needs verification | Build: Maximum price and reset implemented; no separate minimum-price control.
+Sort recommended and price ascending or descending,search,must,yes,yes,S02 sort menu observed | Build: Working client-side catalog sorting.
+Load more results,search,should,yes,no,S02 control observed; pagination behavior not exercised
+Result count and service-specific listing cards,discovery,must,yes,yes,S02; count is catalog entries and not proven live stock | Build: Public active-provider catalog with live result count.
+Car gallery specifications and conditions,catalog,must,yes,partial,S03; independent copy and licensed media required | Build: Detail image/specifications/conditions; no multi-image gallery.
+Three-stage car reservation,booking,must,yes,yes,S03 S04 S05; observed through blank final traveler form | Build: Trip then explicit protection then traveler; server request persistence.
+Guest booking without customer account,booking,must,documented,yes,R03 no customer accounts; public form requires no login | Build: Private guest capability access; no signup required.
+Dates hourly times and pickup delivery address,booking,must,yes,partial,S03; required validation observed | Build: Dates and pickup/return city; hourly handover scheduling not implemented.
+Extras quantities and maximums,booking,should,yes,partial,S03 extra driver and child or booster seats | Build: Child-seat quantity/maximum; additional driver/booster-specific options not implemented.
+Coupon entry and time-limited promotion,pricing,should,yes,no,S01 S03; redemption rules not verified
+Four protection plans,protection,must,yes,yes,S04; daily premium excess deposit and minimum age | Build: Four sample plans with separately displayed deposit and excess.
+Plan-specific age eligibility,protection,must,documented,yes,S04 ages shown; actual rejection behavior untested | Build: Server checks exact age on pickup and licence anniversary.
+Rental duration and itemized quote,pricing,must,yes,partial,S03 S04; base protection tax total observed; exact tax and rounding unknown | Build: Server integer-cent calendar pricing with cover/extras; live tax and fee policies need review.
+Separate prepayment balance and security deposit,payments,must,documented,no,R06; processor and checkout allocation unverified
+Traveler contact residence and birth date,booking,must,yes,partial,S05 names email WhatsApp country DOB | Build: Name/email/phone and driver eligibility; residence field not implemented.
+Flight number and special requests,booking,should,yes,partial,S05; tracking automation not verified | Build: Freeform notes support arrival/flight information; no dedicated flight tracking.
+Company invoice option,booking,could,yes,no,S05 checkbox observed; expanded fields unknown
+Policy acknowledgment before reservation,booking,must,yes,yes,S05; policy snapshot proposed for independent version | Build: Required consent and policy version/timestamp saved.
+Required-field summary and inline errors,forms,must,yes,partial,S03 observed; later-stage validation untested | Build: Native required-field checks plus server error banner; no full field-level server summary.
+Online payment checkout,payments,must,documented,no,S17 not visited; footer payment marks do not prove enabled methods
+Booking confirmation and reference,notifications,must,documented,partial,R02 R03 R06; no live confirmation issued | Build: Request receipt/reference and private management; payment-backed confirmation unavailable.
+Email confirmation or receipt,notifications,must,documented,no,R03; delivery content and reliability untested
+Supplier approval and equivalent vehicle coordination,operations,must,documented,partial,S03 and R06; implementation workflow unknown | Build: Agency reviews availability; no concrete-resource allocation or substitute workflow.
+Change or cancel through support,operations,must,documented,partial,R02 R03 R07; no actual request sent | Build: Support requests and guest withdrawal; no automatic trip repricing.
+Manage Booking link,operations,should,documented,yes,S19 route and controls unknown; conflicts with support-only FAQ wording | Build: Private saved link; refresh status and cancel pending requests.
+Listing-specific cancellation overrides and refunds,operations,must,documented,partial,R07; request timestamp matters; execution not tested | Build: Draft cancellation policy; no refund execution or live listing-specific rules.
+Africa Casablanca date-aware scheduling,localization,must,documented,partial,R06 R07 zone; UI GMT wording should not become fixed-offset logic | Build: Local calendar-date inputs and Casablanca date display; no hourly scheduling.
+Responsive home and mobile menu,interface,must,yes,yes,S01 inspected at 390x844; other mobile pages unverified | Build: 390px and desktop browser checks and screenshots.
+Cookie consent choices and management entry,privacy,must,yes,partial,S01 initial modal and footer; preference persistence not fully verified | Build: Essential-cookie notice/preference persistence; no analytics or full preference manager.
+Support page contact channels and message form,support,must,yes,yes,S11; no message submitted | Build: Persisted support form and platform inbox; no invented phone/contact addresses.
+Floating support service chooser,support,should,yes,partial,Shared accessible support launcher and FAQ/contact links; no configured live WhatsApp channel.
+Terms cancellation and insurance policy reader,content,must,yes,partial,S14; author independent policies | Build: Original development terms/cancellation/privacy and sample cover conditions; commercial policy review pending.
+Private driver category and journey search,drivers,should,yes,skip,R09 from city to city date passengers; results route unverified | Build: Category and guest request form; dedicated intercity journey search unavailable. | 2026-10-30: Removed from current product scope by user request.
+Airport or intercity transfer reservation,drivers,should,yes,skip,S07 date time route passenger and luggage fields | Build: Request form with meeting point and guests; no structured arrival/luggage workflow. | 2026-10-30: Removed from current product scope by user request.
+Estimated driver quote disclosed,drivers,should,yes,skip,S07 exact price set after trip review | Build: Request total shown; supplier confirms route-specific final quote. | 2026-10-30: Removed from current product scope by user request.
+Boat listing and option-based booking,boats,should,yes,skip,S08 date time option guests; second stage not traversed | Build: Boat category and guest request; selectable duration/time packages unavailable. | 2026-10-30: Removed from current product scope by user request.
+Boat capacity captain and marina details,boats,should,yes,skip,S08; independent provider inventory required | Build: Capacity and captain sample details; no verified operator/marina contract. | 2026-10-30: Removed from current product scope by user request.
+Activity listing options and time preference,activities,should,yes,partial,S09; second stage not traversed | Build: Activity requests and guests; time preference can be noted; no package chooser.
+Activity inclusions pickup and difficulty,activities,should,yes,partial,S09 specifications and description | Build: Description/inclusions/pickup; no formal difficulty classification.
+Weather cancellation and reschedule handling,operations,should,documented,partial,R06 R07; operator authority and actual processing unverified | Build: Provider-review policy described; automated weather/reschedule operations unavailable.
+Localized navigation and content routes,localization,should,yes,yes,Ten language links observed; translation completeness and RTL untested | 2026-10-21: English/French/Arabic with server-rendered content and metadata; cookie preference; stable URLs; RTL dashboards and public flows; locale formatting and browser tests.
+City and subcategory landing templates,discovery,should,yes,partial,S06 S10; linked variants not all inspected | Build: City/category-scoped catalog rather than dedicated editorial landing pages.
+FAQ and travel editorial entry points,content,could,yes,yes,Dedicated grouped FAQ / original travel-guide index and three article pages; English French Arabic.
+Partner application with RC upload,partners,should,yes,yes,Complete business/owner/contact/RC/capacity/declaration form; bounded PDF/JPEG/PNG upload; MongoDB persistence and staff-only download.
+Manual supplier verification and setup,partners,should,documented,partial,R15 describes staff review contact terms and listing setup | Build: Platform approval/suspension and manager provisioning; verification occurs outside application.
+Customer account portal,accounts,could,unverified,no,R03 explicitly says accounts not yet available; do not count as established parity
+Authenticated supplier or admin dashboard,operations,could,unverified,yes,May be needed for own operations; no public UI evidence | Build: Agency and platform workspaces built with tenant-scoped data and manager onboarding.
+Marhire brand copy photos and catalog records,rights,skip,yes,no,Excluded; create independent identity and license or produce own content
+Existing review identities ratings and verification,rights,skip,yes,no,Excluded; reputation and third-party content cannot transfer
+Existing suppliers customers and commercial deals,network,skip,documented,no,Excluded; establish own provider relationships and inventory
+Private code endpoints and operational licenses,rights,skip,unverified,no,Excluded; no code or private API inspected and no license transfers
+Agency reservation listing and calendar workspace,operations,must,unverified,yes,New user requirement; implemented and checked on the local application.
+Platform agency onboarding and support workspace,operations,must,unverified,yes,New user requirement; implemented and checked on the local application.
+Platform operations queues and review filters,operations,must,unverified,yes,Linked all-date review queues; agency status/sort/search; support status/search; catalog visibility/category; resettable empty states and accurate counts.
+Reservation table pagination and saved status,operations,should,unverified,yes,Ten rows per page; filter changes reset the page; instant local status tabs save selection in the URL.
+Agency suspension impact confirmation,operations,must,unverified,yes,Focus-trapped impact dialog; cancel preserves access; confirmed action uses existing authorized API.
+MongoDB persistence and staff tenant authorization,backend,must,unverified,yes,New user requirement; implemented and checked on the local application.
+Agency contact management,operations,must,unverified,yes,2026-10-30: Agency-scoped contact creation editing archiving and email-matched rental history.
+Physical vehicle register and service reminders,operations,must,unverified,yes,2026-10-30: Separate physical fleet with unique plates; mileage; manual status; listing link; insurance and service dates/mileage.
+Agency invoices and payment ledger,operations,must,unverified,yes,2026-10-30: MAD/EUR per invoice; server totals; draft/issue/void; sequential numbering; immutable snapshots; partial payments; printable document; tenant and stale-write protection.
+Persistent dashboard navigation,interface,must,unverified,yes,2026-10-30: Shared authenticated layouts preserve shell and cached records; background refresh and inline retry; scoped filters; no repeated full-view loading during section navigation.
+Accessible public and staff interfaces,interface,must,unverified,partial,2026-10-30: Shared contrast/focus/keyboard/dialog/semantic/reflow improvements; automated multi-locale audit and keyboard workflows pass; manual screen-reader conformance validation remains.
+Agency rental contracts,operations,must,unverified,yes,2026-10-30: Agency-scoped drafts and immutable numbered agreements; contact/vehicle/reservation/invoice links; EUR/MAD daily prices and separate deposit; conditions/terms; return records; void; paper signature print/PDF; ownership and version checks.
+Car photo uploads and rental galleries,operations,must,unverified,yes,2026-10-31: Six validated photos per car; private physical fleet covers; published listing covers and thumbnail gallery; descriptions and cover selection; owned MongoDB media; resized WebP without source metadata; English/French/Arabic controls.

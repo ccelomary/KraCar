@@ -1,0 +1,799 @@
+/* Public marketplace and onboarding patterns, scoped away from staff layout. */
+.mobile-service-links {
+  display: none;
+}
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.guide-card {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+.guide-card:hover {
+  box-shadow: var(--shadow-card);
+}
+.guide-card > img {
+  width: 100%;
+  height: 13rem;
+  object-fit: cover;
+}
+.guide-card > div {
+  padding: 1.4rem;
+}
+.guide-card h3 {
+  margin-block: 0.65rem;
+  font-size: 1.1rem;
+}
+.guide-card p {
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+.article-page article {
+  max-width: 60rem;
+  margin: 2rem auto;
+}
+.article-image {
+  width: 100%;
+  height: auto;
+  max-height: 30rem;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+}
+.article-copy {
+  max-width: 44rem;
+  margin: 2.5rem auto;
+}
+.article-copy section {
+  margin-block: 2rem;
+}
+.article-copy p {
+  margin-top: 0.8rem;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 25;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+.announcement {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  background: var(--color-announcement);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+.announcement a {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.site-header .public-header {
+  height: var(--header-nav-height);
+}
+.site-header .public-header .brand {
+  color: var(--color-brand);
+}
+.site-header .brand small {
+  display: none;
+}
+.site-header .public-nav {
+  margin-inline-start: auto;
+}
+.site-header .public-nav > a {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.travel-menu {
+  position: relative;
+}
+.travel-menu summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  padding: 0.7rem 0;
+  list-style: none;
+}
+.travel-menu summary::-webkit-details-marker {
+  display: none;
+}
+.travel-menu-items {
+  position: absolute;
+  top: 100%;
+  inset-inline-end: 0;
+  width: 14rem;
+  padding: 0.6rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  display: grid;
+  z-index: 30;
+}
+.travel-menu-items a {
+  padding: 0.7rem;
+  border-radius: var(--radius-control);
+}
+.travel-menu-items a:hover {
+  background: var(--color-brand-soft);
+}
+.public-shell .hero {
+  min-height: 29rem;
+  text-align: center;
+}
+.public-shell .hero-image,
+[dir="rtl"] .public-shell .hero-image {
+  inset: 0;
+  opacity: 1;
+}
+.public-shell .hero-image::after,
+[dir="rtl"] .public-shell .hero-image::after {
+  display: block;
+  background: var(--color-hero-shade);
+}
+.public-shell .hero-content {
+  padding: 3.5rem 2rem 10rem;
+  color: var(--color-white);
+}
+.public-shell .hero .eyebrow {
+  color: var(--color-hero-text);
+}
+.public-shell .hero h1,
+[dir="rtl"] .public-shell .hero h1 {
+  max-width: 60rem;
+  margin: 1rem auto;
+  font-family: var(--font-sans);
+  font-size: var(--hero-title-size);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -0.07rem;
+}
+.public-shell .hero h1 em {
+  color: var(--color-white);
+  font-style: normal;
+  font-weight: 700;
+}
+.public-shell .hero p {
+  max-width: 42rem;
+  margin: auto;
+  color: var(--color-hero-text);
+}
+.public-shell .hero-caption {
+  color: var(--color-white);
+  border-color: var(--color-hero-text);
+  margin-top: 1.2rem;
+}
+.public-shell .search-container {
+  margin-top: -7rem;
+}
+.public-shell .search-box {
+  padding: 1.4rem 1.6rem 1.6rem;
+}
+.public-shell .service-tabs {
+  gap: 1rem;
+}
+.public-shell .search-box .service-tabs {
+  background: var(--color-canvas);
+  border: 0;
+  border-radius: 2rem;
+  padding: 0.25rem;
+  width: fit-content;
+  margin: 0 auto 1.4rem;
+  gap: 0.25rem;
+}
+.public-shell .search-box .service-tab {
+  border: 0;
+  border-radius: 2rem;
+  padding: 0.6rem 1.2rem;
+}
+.public-shell .search-box .service-tab.active {
+  background: var(--color-brand);
+  color: var(--color-white);
+}
+.public-shell .search-fields label {
+  font-size: 0.75rem;
+  color: var(--color-ink);
+}
+.public-shell .search-fields {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+}
+.public-shell .search-fields.single-date {
+  grid-template-columns: 2fr 1fr auto;
+}
+.public-shell .trust-row {
+  padding-top: 1.7rem;
+}
+.public-shell .section-head h2,
+.public-shell .partner-banner h2 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.04rem;
+}
+.public-shell .listing-card {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+}
+.public-shell .listing-card:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-0.2rem);
+}
+.public-shell .listing-card .listing-info {
+  padding: 1rem;
+}
+.public-shell .listing-photo {
+  border-radius: 0;
+}
+.public-shell .partner-banner p,
+.insight-card p {
+  opacity: 1;
+}
+.public-shell .result-grid {
+  grid-template-columns: 1fr;
+}
+.public-shell .result-grid .listing-card {
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+}
+.public-shell .result-grid .listing-photo {
+  min-height: 13rem;
+  height: 100%;
+}
+.public-shell .result-grid .listing-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.public-shell .catalog-heading h1,
+.public-shell .detail-top h1,
+.public-shell .support-layout h1 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.04rem;
+}
+.section-title {
+  text-align: center;
+  max-width: 46rem;
+  margin: 0 auto 2.5rem;
+}
+.section-title h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.04rem;
+  margin-bottom: 0.65rem;
+}
+.section-title h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+.section-title p {
+  color: var(--color-muted);
+  margin-top: 0.75rem;
+}
+.section-title .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+.partner-intro {
+  text-align: center;
+  padding: var(--section-space) 0;
+  background: var(--color-brand-soft);
+}
+.partner-intro h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 1rem auto;
+  max-width: 48rem;
+}
+.partner-intro p {
+  max-width: 42rem;
+  margin: 0 auto 1.75rem;
+  color: var(--color-muted);
+  font-size: 1rem;
+}
+.partner-intro .row {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.partner-section {
+  padding-block: var(--section-space);
+}
+.partner-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  text-align: center;
+}
+.feature-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  margin-bottom: 1.3rem;
+}
+.partner-benefits h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+}
+.partner-benefits p,
+.partner-service-grid p,
+.onboarding-steps p {
+  color: var(--color-muted);
+  line-height: 1.8;
+  font-size: 0.85rem;
+}
+.partner-services {
+  padding-block: var(--section-space);
+  background: var(--color-canvas);
+}
+.partner-service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.partner-service-grid article {
+  padding: 1.6rem;
+}
+.partner-service-grid article > svg {
+  color: var(--color-brand);
+  margin-bottom: 1rem;
+}
+.partner-service-grid h3 {
+  margin-bottom: 0.6rem;
+}
+.onboarding-steps {
+  max-width: 58rem;
+  margin: auto;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+.onboarding-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+.onboarding-steps li > span {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  background: var(--color-brand);
+  color: var(--color-white);
+  border-radius: 50%;
+  font-weight: 700;
+}
+.onboarding-steps li > div {
+  padding: 1.2rem 1.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  flex: 1;
+}
+.onboarding-steps h3 {
+  margin-bottom: 0.4rem;
+}
+.application-section {
+  padding: var(--section-space) 1.25rem;
+  background: var(--color-canvas);
+  scroll-margin-top: 7rem;
+}
+.partner-application {
+  max-width: var(--partner-form-width);
+  margin: auto;
+  padding: 2rem;
+}
+.partner-application .stack {
+  gap: 1.5rem;
+}
+.partner-application .field-grid {
+  gap: 1.5rem 1rem;
+}
+.partner-application input:not([type="checkbox"]):not([type="file"]),
+.partner-application textarea {
+  background: var(--color-canvas);
+}
+.partner-application label {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+.required-note {
+  font-size: 0.8rem;
+}
+.document-drop {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 0.6rem;
+  border: 2px dashed var(--color-input-line);
+  border-radius: var(--radius-control);
+  padding: 1.6rem 1rem;
+  margin-top: 0.4rem;
+  background: var(--color-canvas);
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.document-drop strong {
+  font-weight: 500;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.document-drop span {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+.document-drop svg {
+  color: var(--color-brand);
+}
+.document-drop input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.document-drop:focus-within,
+.document-drop.dragging {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+  background: var(--color-brand-soft);
+}
+.document-privacy {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  margin-top: 0.6rem;
+}
+.partner-contact {
+  padding: 3.5rem 1.25rem;
+  text-align: center;
+  background: var(--color-brand);
+  color: var(--color-white);
+}
+.partner-contact h2 {
+  font-size: 1.8rem;
+}
+.partner-contact p {
+  margin: 0.8rem 0 1.5rem;
+}
+.application-review {
+  border-block: 1px solid var(--color-line);
+  margin-top: 1rem;
+  padding-block: 0.7rem;
+}
+.application-review summary {
+  cursor: pointer;
+  color: var(--color-brand);
+  font-weight: 600;
+}
+.application-review dl {
+  display: grid;
+  gap: 0.6rem;
+  margin-block: 1rem;
+}
+.application-review dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.75rem;
+}
+.application-review dt {
+  color: var(--color-muted);
+}
+.application-review dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: end;
+}
+.application-review > p {
+  margin-bottom: 1rem;
+}
+.info-page {
+  padding-block: var(--section-space);
+}
+.faq-section {
+  max-width: 53rem;
+  margin-inline: auto;
+}
+.faq-section section {
+  margin-block: 2.5rem;
+}
+.faq-section section > h2 {
+  margin-bottom: 1.2rem;
+}
+.faq-section details {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  margin-block: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-surface);
+}
+.faq-section summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+.faq-section details p {
+  padding-top: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.85;
+}
+.faq-section > .text-link {
+  margin-top: 1.2rem;
+}
+.info-help {
+  background: var(--color-brand-soft);
+  padding: 2.5rem;
+  border-radius: var(--radius-card);
+  text-align: center;
+  margin-top: 3rem;
+}
+.info-help .button {
+  margin-top: 1rem;
+}
+.about-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  margin-block: 3rem;
+}
+.about-feature img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-card);
+}
+.about-feature p {
+  margin-block: 1rem;
+  color: var(--color-muted);
+}
+.city-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+.city-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px solid var(--color-line);
+  padding: 0.7rem 1rem;
+  border-radius: 2rem;
+}
+.city-links a:hover {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+.help-fab,
+.top-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  display: grid;
+  place-items: center;
+  color: var(--color-white);
+  background: var(--color-brand);
+  border-radius: 50%;
+  box-shadow: var(--shadow-card);
+  z-index: 35;
+}
+.help-fab {
+  inset-inline-start: 1.5rem;
+  width: 3.4rem;
+  height: 3.4rem;
+}
+.top-fab {
+  inset-inline-end: 1.5rem;
+  width: 2.7rem;
+  height: 2.7rem;
+}
+.help-popover {
+  position: fixed;
+  bottom: 5.7rem;
+  inset-inline-start: 1.5rem;
+  width: min(21rem, calc(100vw - 3rem));
+  padding: 1.4rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  z-index: 35;
+}
+.help-popover p {
+  color: var(--color-muted);
+  margin-block: 0.8rem 1.2rem;
+}
+.help-popover .text-link {
+  display: flex;
+  margin-top: 1rem;
+}
+@media (max-width: 1100px) {
+  .site-header .public-nav .travel-menu {
+    display: none;
+  }
+  .mobile-service-links {
+    display: grid;
+    gap: 1rem;
+  }
+  .public-shell .search-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .public-shell .search-fields .button {
+    grid-column: 1 / -1;
+  }
+  .site-header .public-nav {
+    margin-inline-start: 0;
+  }
+  .site-header .public-nav.open {
+    padding: 1.4rem;
+    top: 100%;
+  }
+  .travel-menu {
+    width: 100%;
+  }
+  .travel-menu-items {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border: 0;
+  }
+  .partner-service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+  .public-shell .result-grid .listing-card {
+    grid-template-columns: 1fr;
+  }
+  .public-shell .result-grid .listing-photo {
+    min-height: 12rem;
+    height: 12rem;
+  }
+  .public-shell .search-fields,
+  .public-shell .search-fields.single-date {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .announcement {
+    font-size: 0.65rem;
+    padding: 0.6rem 0.8rem;
+  }
+  .announcement a {
+    display: none;
+  }
+  .site-header .public-header {
+    padding-inline: 1rem;
+  }
+  .public-shell .hero {
+    min-height: 28rem;
+  }
+  .public-shell .hero-content {
+    padding: 2.7rem 1.2rem 10rem;
+  }
+  .public-shell .hero h1,
+  [dir="rtl"] .public-shell .hero h1 {
+    font-size: 2.15rem;
+    letter-spacing: -0.04rem;
+    line-height: 1.22;
+  }
+  .public-shell .hero p {
+    font-size: 0.85rem;
+  }
+  .public-shell .search-container {
+    margin-top: -6.5rem;
+    padding-inline: 1rem;
+  }
+  .public-shell .search-box {
+    padding: 1rem;
+  }
+  .public-shell .search-box .service-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    border-radius: var(--radius-card);
+    gap: 0.25rem;
+  }
+  .public-shell .search-box .service-tab {
+    padding: 0.55rem;
+    justify-content: center;
+    font-size: 0.7rem;
+  }
+  .public-shell .section-head h2 {
+    font-size: 1.55rem;
+  }
+  .partner-intro {
+    padding-block: 3rem;
+  }
+  .partner-intro h1,
+  .section-title h1 {
+    font-size: 2rem;
+  }
+  .partner-intro p {
+    font-size: 0.9rem;
+  }
+  .partner-section,
+  .partner-services,
+  .info-page {
+    padding-block: 3rem;
+  }
+  .partner-benefits {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .partner-service-grid {
+    gap: 0.75rem;
+  }
+  .partner-service-grid article {
+    padding: 1rem;
+  }
+  .partner-service-grid h3 {
+    font-size: 0.9rem;
+  }
+  .partner-service-grid p {
+    font-size: 0.75rem;
+  }
+  .section-title h2 {
+    font-size: 1.6rem;
+  }
+  .section-title {
+    margin-bottom: 1.75rem;
+  }
+  .partner-application {
+    padding: 1.25rem;
+  }
+  .partner-application .field-grid {
+    grid-template-columns: 1fr;
+  }
+  .partner-application .stack {
+    gap: 1.25rem;
+  }
+  .partner-application .check-label {
+    font-size: 0.75rem;
+  }
+  .onboarding-steps li {
+    gap: 0.7rem;
+  }
+  .onboarding-steps li > div {
+    padding: 1rem;
+  }
+  .about-feature {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .help-fab {
+    bottom: 1rem;
+    inset-inline-start: 1rem;
+    width: 3rem;
+    height: 3rem;
+  }
+  .top-fab {
+    bottom: 1rem;
+    inset-inline-end: 1rem;
+  }
+}

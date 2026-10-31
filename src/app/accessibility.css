@@ -1,0 +1,113 @@
+/* Shared keyboard, zoom and assistive-technology behavior. */
+.public-footer h2 {
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+.booking-panel form,
+.booking-panel .field-grid,
+.booking-panel label {
+  min-width: 0;
+}
+@media (max-width: 400px) {
+  .booking-panel > .row {
+    flex-wrap: wrap;
+  }
+  .booking-panel .field-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .demo-login > .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+.skip-link {
+  position: fixed;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  z-index: 200;
+  padding: 0.75rem 1rem;
+  color: var(--color-white);
+  background: var(--color-ink);
+  border-radius: var(--radius-control);
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+:is(a, button, input, select, textarea, summary, [tabindex]) {
+  scroll-margin-block: 9rem 2rem;
+}
+:is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  box-shadow: 0 0 0 2px var(--color-white);
+}
+main:focus,
+main h1:focus {
+  outline-offset: 0.25rem;
+}
+.dialog-backdrop {
+  margin: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  color: var(--color-ink);
+}
+.dialog-backdrop:not([open]) {
+  display: none;
+}
+.dialog-backdrop::backdrop {
+  background: transparent;
+}
+.sidebar-close {
+  position: absolute;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+}
+.stepper {
+  list-style: none;
+  padding: 0;
+}
+.text-link {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.empty h2 {
+  font-size: 1rem;
+}
+.workspace-content .listing-info > .row > h2 {
+  font-size: 1rem;
+}
+.agency-card > h2,
+.ticket-card h2 {
+  font-size: 1rem;
+}
+.login-page > .login-content,
+.login-content > .login-form {
+  min-width: 0;
+}
+.guide-card :is(h2, h3) {
+  margin-block: 0.65rem;
+  font-size: 1.1rem;
+}
+.support-layout .row h2,
+.filters > .row h2 {
+  font-size: 1rem;
+}
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid Highlight !important;
+  }
+  .button,
+  .service-tab,
+  .icon-button,
+  .tab,
+  .side-link {
+    border: 1px solid ButtonText;
+  }
+  .service-tab.active,
+  .tab.active,
+  .side-link.active {
+    border: 2px solid Highlight;
+  }
+}

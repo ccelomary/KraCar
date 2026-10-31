@@ -1,0 +1,969 @@
+{
+  "date": "2026-10-30T21:52:21.419Z",
+  "checks": [
+    {
+      "path": "/",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/explore?category=cars",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/explore?category=activities",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/taghazout-surf",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/support",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/faq",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/about",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/blog",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/article/plan-your-morocco-road-trip",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/article/choose-your-coastal-day",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/article/arrive-with-a-plan",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/policies/terms",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/policies/privacy",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/policies/cancellation",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/login",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/no-such-car",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/explore?category=cars",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/explore?category=activities",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/taghazout-surf",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/support",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/faq",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/about",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/blog",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/article/plan-your-morocco-road-trip",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/article/choose-your-coastal-day",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/article/arrive-with-a-plan",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/policies/terms",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/policies/privacy",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/policies/cancellation",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/login",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/no-such-car",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "locale": "en",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/login",
+      "locale": "en",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": [],
+      "previousFindings": {
+        "overflow": true,
+        "violations": []
+      }
+    },
+    {
+      "path": "/partners",
+      "locale": "en",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "en",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": [],
+      "previousFindings": {
+        "overflow": true,
+        "violations": []
+      }
+    },
+    {
+      "path": "/agency",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/bookings",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/fleet",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/vehicles",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/contacts",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/calendar",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/settings",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/bookings",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/fleet",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/vehicles",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/contacts",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/calendar",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/settings",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/bookings",
+      "locale": "en",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "en",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/bookings",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/agencies",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/listings",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/calendar",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/support",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/settings",
+      "locale": "en",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/bookings",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/agencies",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/listings",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/calendar",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/support",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform/settings",
+      "locale": "en",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "en",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "locale": "fr",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "locale": "fr",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/support",
+      "locale": "fr",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "fr",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "locale": "fr",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "locale": "fr",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/support",
+      "locale": "fr",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "fr",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "locale": "fr",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/login",
+      "locale": "fr",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "locale": "fr",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "fr",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": [],
+      "previousFindings": {
+        "overflow": true,
+        "violations": []
+      }
+    },
+    {
+      "path": "/agency/contacts",
+      "locale": "fr",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/vehicles",
+      "locale": "fr",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "fr",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/contacts",
+      "locale": "fr",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/vehicles",
+      "locale": "fr",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "fr",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/bookings",
+      "locale": "fr",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "fr",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "fr",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "fr",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "fr",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "locale": "ar",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "locale": "ar",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/support",
+      "locale": "ar",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "ar",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "locale": "ar",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "locale": "ar",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/support",
+      "locale": "ar",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "ar",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "locale": "ar",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/login",
+      "locale": "ar",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "locale": "ar",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/experiences/dacia-duster",
+      "locale": "ar",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/contacts",
+      "locale": "ar",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/vehicles",
+      "locale": "ar",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "ar",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/contacts",
+      "locale": "ar",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/vehicles",
+      "locale": "ar",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "ar",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/bookings",
+      "locale": "ar",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/agency/invoices",
+      "locale": "ar",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "ar",
+      "width": 1440,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "ar",
+      "width": 390,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "path": "/platform",
+      "locale": "ar",
+      "width": 320,
+      "state": "default",
+      "overflow": false,
+      "violations": []
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+.agency-management,
+.management-summary {
+  margin-block: 1.5rem;
+}
+.management-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+.management-metrics .card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  min-width: 0;
+}
+.management-metrics strong {
+  font-size: 1.35rem;
+  overflow-wrap: anywhere;
+}
+.management-metrics svg {
+  color: var(--color-brand);
+}
+.management-metrics span {
+  color: var(--color-muted);
+}
+.management-toolbar {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  margin-block: 1.25rem;
+}
+.management-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1rem;
+}
+.management-card {
+  padding: 1.5rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.management-card h2 {
+  font-size: 1.15rem;
+  margin-block: 0.75rem;
+}
+.management-card .row {
+  flex-wrap: wrap;
+}
+.management-details {
+  display: grid;
+  gap: 0.65rem;
+}
+.management-details > div,
+.invoice-totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.management-details dt {
+  color: var(--color-muted);
+}
+.management-details dd,
+.invoice-totals dd {
+  margin: 0;
+  text-align: end;
+}
+.vehicle-plate {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: var(--color-canvas);
+}
+.management-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--color-brand);
+}
+.agency-management .form-error {
+  padding: 0.75rem 1rem;
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
+  border-radius: var(--radius-control);
+}
+.agency-management .badge.available,
+.agency-management .badge.paid {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+.agency-management .badge.rented,
+.agency-management .badge.issued,
+.agency-management .badge.partially_paid {
+  background: var(--color-blue-soft);
+  color: var(--color-blue);
+}
+.agency-management .badge.maintenance {
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+}
+.agency-management .badge.overdue,
+.agency-management .badge.void {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+.management-notes {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.invoice-amount {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.invoice-items {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  padding: 1rem;
+  min-width: 0;
+}
+.invoice-item {
+  display: grid;
+  gap: 0.75rem;
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--color-line);
+}
+.invoice-item:last-child {
+  border-bottom: 0;
+}
+.invoice-document {
+  padding-block: 1rem;
+  overflow-wrap: anywhere;
+}
+.invoice-document-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.invoice-document-head h2 {
+  font-size: 1.25rem;
+}
+.invoice-document-head p {
+  margin-block: 0.5rem;
+}
+.invoice-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--color-line);
+}
+.invoice-line small {
+  display: block;
+  color: var(--color-muted);
+}
+.invoice-line > strong {
+  flex-shrink: 0;
+}
+.invoice-totals {
+  margin-inline-start: auto;
+  max-width: 22rem;
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 1.5rem;
+}
+.invoice-totals > div:last-child {
+  font-weight: 700;
+  border-top: 1px solid var(--color-line);
+  padding-top: 0.75rem;
+}
+.management-actions {
+  flex-wrap: wrap;
+}
+.fleet-status-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+@media (max-width: 900px) {
+  .management-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .management-toolbar,
+  .invoice-document-head {
+    grid-template-columns: 1fr;
+  }
+  .management-metrics {
+    gap: 0.75rem;
+  }
+  .management-metrics .card {
+    padding: 1rem;
+  }
+  .management-metrics strong {
+    font-size: 1.1rem;
+  }
+  .management-card {
+    padding: 1.25rem;
+  }
+}
+@media print {
+  @page {
+    margin: 1.5cm;
+  }
+  body:has(.invoice-document)
+    *:not(:has(.invoice-document)):not(.invoice-document):not(
+      .invoice-document *
+    ) {
+    display: none !important;
+  }
+  body:has(.invoice-document),
+  body:has(.invoice-document) .workspace,
+  body:has(.invoice-document) .workspace-main,
+  body:has(.invoice-document) .workspace-content,
+  body:has(.invoice-document) .agency-management {
+    display: block;
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+    background: var(--color-white);
+  }
+  body:has(.invoice-document) * {
+    visibility: hidden;
+  }
+  body:has(.invoice-document) .invoice-document,
+  body:has(.invoice-document) .invoice-document * {
+    visibility: visible;
+  }
+  body:has(.invoice-document) .dialog-backdrop {
+    position: static;
+    height: auto;
+    overflow: visible;
+    display: block;
+    padding: 0;
+    background: transparent;
+  }
+  body:has(.invoice-document) .dialog {
+    max-width: none;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    box-shadow: none;
+    border: 0;
+  }
+  body:has(.invoice-document) .dialog-header,
+  body:has(.invoice-document) .management-no-print {
+    display: none;
+  }
+  body:has(.invoice-document) .dialog-content {
+    padding: 0;
+    overflow: visible;
+  }
+  .invoice-document {
+    position: static;
+    padding: 0;
+    color: var(--color-ink);
+    background: var(--color-white);
+  }
+  .invoice-document-head {
+    grid-template-columns: 1fr 1fr;
+  }
+  .invoice-line {
+    break-inside: avoid;
+  }
+}
