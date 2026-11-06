@@ -1,0 +1,13 @@
+[error] src/components/rental-date-time-field.tsx: SyntaxError: '}' expected. (79:392)
+[error]   77 |   }
+[error]   78 |   const minuteOptions=[...new Set(["00","15","30","45",time.slice(3,5)])].sort();
+[error] > 79 |   return <dialog ref={dialog} id={id} className="kc-calendar-dialog" aria-modal="true" aria-labelledby={`${id}-title`} onCancel={event=>{event.preventDefault();onClose();}} onClick={event=>{if(event.target===event.currentTarget){const r=event.currentTarget.getBoundingClientRect();if(event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom)onClose();}}>
+[error]      |                                                                                                                                                                                                                                                                                                                                                                                                        ^
+[error]   80 |     <div className="kc-calendar-content">
+[error]   81 |       <div className="kc-calendar-top"><div><span className="kc-calendar-context"><CalendarDays size={15} aria-hidden="true"/>{t("Choose a date and time")}</span><h2 id={`${id}-title`}>{t(label)}</h2></div><button type="button" className="kc-calendar-icon" onClick={onClose} aria-label={t("Close calendar")}><X size={17} aria-hidden="true"/></button></div>
+[error]   82 |       <div className="kc-calendar-month"><h3 id={`${id}-month`} aria-live="polite">{monthTitle}</h3><div><button type="button" className="kc-calendar-icon" disabled={!previousAllowed} onClick={()=>viewMonth(previousMonth)} aria-label={t("Previous month")}><ChevronLeft size={17} aria-hidden="true"/></button><button type="button" className="kc-calendar-icon" disabled={!nextAllowed} onClick={()=>viewMonth(nextMonth)} aria-label={t("Next month")}><ChevronRight size={17} aria-hidden="true"/></button></div></div>
+src/lib/rental-calendar.ts 81ms
+src/components/kracar-marketplace.tsx 430ms
+src/components/rental-booking-panel.tsx 261ms
+src/app/calendar.css 304ms
+src/app/layout.tsx 16ms (unchanged)

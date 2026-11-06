@@ -1,0 +1,212 @@
+
+> kracar@0.1.0 test
+> tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: car photos are resized, re-encoded and stripped of source metadata
+ok 1 - car photos are resized, re-encoded and stripped of source metadata
+  ---
+  duration_ms: 479.5108
+  type: 'test'
+  ...
+# Subtest: photo uploads reject oversized, disguised and unreadable image content
+ok 2 - photo uploads reject oversized, disguised and unreadable image content
+  ---
+  duration_ms: 33.159
+  type: 'test'
+  ...
+# Subtest: photo references reject duplicate selections and external image URLs
+ok 3 - photo references reject duplicate selections and external image URLs
+  ---
+  duration_ms: 8.2099
+  type: 'test'
+  ...
+# Subtest: contract rental totals use calendar intervals and integer cents
+ok 4 - contract rental totals use calendar intervals and integer cents
+  ---
+  duration_ms: 7.061
+  type: 'test'
+  ...
+# Subtest: contract validation requires identified parties, dates, condition and agency terms
+ok 5 - contract validation requires identified parties, dates, condition and agency terms
+  ---
+  duration_ms: 14.2513
+  type: 'test'
+  ...
+# Subtest: localized search matches displayed Arabic cities and accented French titles
+ok 6 - localized search matches displayed Arabic cities and accented French titles
+  ---
+  duration_ms: 5.9065
+  type: 'test'
+  ...
+# Subtest: locale preference is allowlisted and takes priority over weighted browser preferences
+ok 7 - locale preference is allowlisted and takes priority over weighted browser preferences
+  ---
+  duration_ms: 0.9086
+  type: 'test'
+  ...
+# Subtest: French and Arabic dictionaries have matching non-empty keys and preserve placeholders
+ok 8 - French and Arabic dictionaries have matching non-empty keys and preserve placeholders
+  ---
+  duration_ms: 29.0599
+  type: 'test'
+  ...
+# Subtest: translation retains spacing, interpolates values and leaves unknown user content intact
+ok 9 - translation retains spacing, interpolates values and leaves unknown user content intact
+  ---
+  duration_ms: 0.9479
+  type: 'test'
+  ...
+# Subtest: all authored static UI messages have both translations
+ok 10 - all authored static UI messages have both translations
+  ---
+  duration_ms: 465.4663
+  type: 'test'
+  ...
+# Subtest: demo payment callbacks require a valid signature and strict server event fields
+ok 11 - demo payment callbacks require a valid signature and strict server event fields
+  ---
+  duration_ms: 10.7328
+  type: 'test'
+  ...
+# Subtest: KraCar fee boundaries round to whole MAD and retain three-day downward jumps
+ok 12 - KraCar fee boundaries round to whole MAD and retain three-day downward jumps
+  ---
+  duration_ms: 3.126
+  type: 'test'
+  ...
+# Subtest: quote precedence, duration discounts, extras and deposits remain deterministic
+ok 13 - quote precedence, duration discounts, extras and deposits remain deterministic
+  ---
+  duration_ms: 3.7238
+  type: 'test'
+  ...
+# Subtest: inventory adjacency and terminal transitions are explicit; financial events balance
+ok 14 - inventory adjacency and terminal transitions are explicit; financial events balance
+  ---
+  duration_ms: 3.2714
+  type: 'test'
+  ...
+# Subtest: invoice calculations use integer cents and reject empty or excessive totals
+ok 15 - invoice calculations use integer cents and reject empty or excessive totals
+  ---
+  duration_ms: 6.9154
+  type: 'test'
+  ...
+# Subtest: invoice state preserves drafts and voids and handles partial payments and overdue balances
+ok 16 - invoice state preserves drafts and voids and handles partial payments and overdue balances
+  ---
+  duration_ms: 0.538
+  type: 'test'
+  ...
+# Subtest: invoice validation rejects fractional quantities and inverted due dates
+ok 17 - invoice validation rejects fractional quantities and inverted due dates
+  ---
+  duration_ms: 9.575
+  type: 'test'
+  ...
+# Subtest: fleet reminders cover dates and mileage without treating unset reminders as overdue
+ok 18 - fleet reminders cover dates and mileage without treating unset reminders as overdue
+  ---
+  duration_ms: 6.3478
+  type: 'test'
+  ...
+# Subtest: 2,000 MAD service separates advance, platform fee, initial payment, balance and caution
+ok 19 - 2,000 MAD service separates advance, platform fee, initial payment, balance and caution
+  ---
+  duration_ms: 3.7091
+  type: 'test'
+  ...
+# Subtest: commission applies after discounts, options and configured taxes, with cent rounding
+ok 20 - commission applies after discounts, options and configured taxes, with cent rounding
+  ---
+  duration_ms: 0.7525
+  type: 'test'
+  ...
+# Subtest: direct and B2B bookings do not acquire marketplace fees or an advance
+ok 21 - direct and B2B bookings do not acquire marketplace fees or an advance
+  ---
+  duration_ms: 0.6564
+  type: 'test'
+  ...
+# Subtest: terms identifiers ignore field order and review metadata but detect changed clauses
+ok 22 - terms identifiers ignore field order and review metadata but detect changed clauses
+  ---
+  duration_ms: 39.0322
+  type: 'test'
+  ...
+# Subtest: partner applications normalize email and capacity and require both declarations
+ok 23 - partner applications normalize email and capacity and require both declarations
+  ---
+  duration_ms: 16.7902
+  type: 'test'
+  ...
+# Subtest: registration uploads use signatures instead of trusting filenames
+ok 24 - registration uploads use signatures instead of trusting filenames
+  ---
+  duration_ms: 1.2914
+  type: 'test'
+  ...
+# Subtest: driver eligibility respects the actual birthday and licence anniversary
+ok 25 - driver eligibility respects the actual birthday and licence anniversary
+  ---
+  duration_ms: 2.6976
+  type: 'test'
+  ...
+# Subtest: rental quote adds cover and seats in integer cents and separates deposit
+ok 26 - rental quote adds cover and seats in integer cents and separates deposit
+  ---
+  duration_ms: 0.8506
+  type: 'test'
+  ...
+# Subtest: calendar billing remains four days across a daylight-saving boundary
+ok 27 - calendar billing remains four days across a daylight-saving boundary
+  ---
+  duration_ms: 0.4065
+  type: 'test'
+  ...
+# Subtest: activity prices multiply guests, not duration or car cover
+ok 28 - activity prices multiply guests, not duration or car cover
+  ---
+  duration_ms: 0.4264
+  type: 'test'
+  ...
+# Subtest: invalid dates, protection, capacity and excessive duration are rejected
+ok 29 - invalid dates, protection, capacity and excessive duration are rejected
+  ---
+  duration_ms: 1.0873
+  type: 'test'
+  ...
+# Subtest: approval cannot directly confirm a booking or revive cancelled trips
+ok 30 - approval cannot directly confirm a booking or revive cancelled trips
+  ---
+  duration_ms: 2.3215
+  type: 'test'
+  ...
+# Subtest: calendar arithmetic clamps leap years and crosses month/year boundaries
+ok 31 - calendar arithmetic clamps leap years and crosses month/year boundaries
+  ---
+  duration_ms: 5.4124
+  type: 'test'
+  ...
+# Subtest: calendar grids have six distinct Monday-first weeks with adjacent month context
+ok 32 - calendar grids have six distinct Monday-first weeks with adjacent month context
+  ---
+  duration_ms: 1.2901
+  type: 'test'
+  ...
+# Subtest: pickup edits preserve valid returns and move invalid returns forward without changing time
+ok 33 - pickup edits preserve valid returns and move invalid returns forward without changing time
+  ---
+  duration_ms: 0.5752
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2926.2231

@@ -118,6 +118,13 @@ export async function POST(req: Request) {
       protection: input.protection,
       extras: input.extras,
       total: price.total,
+      priceSnapshot: price,
+      acceptedConditions: {
+        platformVersion: "2026-11-02",
+        providerId: listing.agencyId,
+        description: listing.description,
+        acceptedAt: new Date().toISOString(),
+      },
       deposit: price.deposit,
       status: "requested",
       createdAt: new Date().toISOString(),
@@ -126,7 +133,7 @@ export async function POST(req: Request) {
       tokenExpiresAt: new Date(Date.now() + 30 * 86400000).toISOString(),
       idempotencyKey: input.idempotencyKey,
       requestSignature,
-      policyVersion: "2026-10-20",
+      policyVersion: "2026-11-02",
       consentAt: new Date().toISOString(),
     };
     try {

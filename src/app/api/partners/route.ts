@@ -72,11 +72,12 @@ export async function POST(req: Request) {
         id,
         status: "pending",
         joined: new Date().toISOString().slice(0, 10),
-        commission: 12,
+        commission: 5,
         declarations: {
           authority: authority === "on",
           consent: consent === "on",
           acceptedAt: new Date().toISOString(),
+          policyVersion: "2026-11-02",
         },
         document: {
           name: file.name.replace(/[^\p{L}\p{N}._ -]/gu, "_").slice(0, 120),

@@ -1,0 +1,69 @@
+
+> kracar@0.1.0 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.ts took 248ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 7.0s
+  Running TypeScript ...
+  Finished TypeScript in 23.6s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/28) ...
+  Generating static pages using 7 workers (7/28) 
+  Generating static pages using 7 workers (14/28) 
+  Generating static pages using 7 workers (21/28) 
+✓ Generating static pages using 7 workers (28/28) in 1043ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /[locale]/[[...path]]
+├ ƒ /about
+├ ƒ /account
+├ ƒ /agency/[[...section]]
+├ ƒ /api/auth
+├ ƒ /api/booking-access
+├ ƒ /api/bookings
+├ ƒ /api/car-images
+├ ƒ /api/car-images/[id]
+├ ƒ /api/catalog
+├ ƒ /api/contracts
+├ ƒ /api/customer-auth/[...all]
+├ ƒ /api/demo-payment-callback
+├ ƒ /api/management
+├ ƒ /api/partners
+├ ƒ /api/partners/[id]/document
+├ ƒ /api/rental
+├ ƒ /api/rental-cars
+├ ƒ /api/rental-documents/[id]
+├ ƒ /api/rental-export
+├ ƒ /api/rental-media
+├ ƒ /api/rental-media/[id]
+├ ƒ /api/support
+├ ƒ /api/workspace
+├ ƒ /article/[slug]
+├ ƒ /blog
+├ ƒ /booking/[id]
+├ ƒ /cars
+├ ƒ /cars/[id]
+├ ƒ /design
+├ ƒ /experiences/[id]
+├ ƒ /explore
+├ ƒ /faq
+├ ○ /icon.svg
+├ ƒ /list-your-property
+├ ƒ /login
+├ ƒ /partners
+├ ƒ /platform/[[...section]]
+├ ƒ /policies/[slug]
+├ ƒ /support
+└ ƒ /workspace/[[...section]]
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -1,3 +1,4 @@
+import { selectDropdown } from "./support/select";
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { mkdir } from "node:fs/promises";
@@ -77,8 +78,14 @@ test("F-Partners/support: application, approval, manager provisioning and a supp
   await page
     .getByLabel("WhatsApp number", { exact: true })
     .fill("+212 600000001");
-  await page.getByLabel("Your specialty", { exact: true }).selectOption("cars");
-  await page.getByLabel("Primary city", { exact: true }).selectOption("Agadir");
+  await selectDropdown(
+    page.getByLabel("Your specialty", { exact: false }),
+    "cars",
+  );
+  await selectDropdown(
+    page.getByLabel("Primary city", { exact: false }),
+    "Agadir",
+  );
   await page
     .getByLabel("Commercial registration number", { exact: true })
     .fill(`QA-${suffix}`);
@@ -154,9 +161,10 @@ test("F-Partners/support: application, approval, manager provisioning and a supp
   await page
     .getByLabel("Email address", { exact: true })
     .fill(`traveler${suffix}@example.com`);
-  await page
-    .getByRole("combobox", { name: /What can we help/ })
-    .selectOption("Planning my trip");
+  await selectDropdown(
+    page.getByRole("combobox", { name: /What can we help/ }),
+    "Planning my trip",
+  );
   await page
     .getByLabel("Your message", { exact: true })
     .fill(
@@ -268,7 +276,10 @@ test("F-Agency: dashboard, listing CRUD, reservation review, export, calendar, s
     .locator(".listing-card")
     .filter({ has: page.getByRole("heading", { name: listingName }) });
   await card.getByRole("button", { name: "Edit", exact: true }).click();
-  await page.getByLabel("Visibility", { exact: true }).selectOption("archived");
+  await selectDropdown(
+    page.getByLabel("Visibility", { exact: false }),
+    "archived",
+  );
   await page.getByRole("button", { name: "Save listing" }).click();
   await expect(card.getByText("Archived", { exact: true })).toBeVisible();
   await page.getByRole("link", { name: /^Reservations/ }).click();

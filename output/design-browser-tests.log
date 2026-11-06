@@ -1,0 +1,19 @@
+
+Running 12 tests using 1 worker
+
+(node:9428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 e2e\booking-journey.spec.ts:150:5 › rental request progresses through details and review without charging or losing edits (3.7s)
+  ok  2 e2e\booking-journey.spec.ts:205:5 › sign-in preserves selected rental dates and extras (3.3s)
+  ok  3 e2e\booking-journey.spec.ts:232:5 › customer overview focuses on bookings and hides business finance metrics (1.9s)
+  ok  4 e2e\booking-journey.spec.ts:252:5 › signed-in workspace failures offer retry without asking for another login (2.0s)
+  ok  5 e2e\booking-journey.spec.ts:266:5 › service choices work with the keyboard and search rejects reversed dates (2.5s)
+  ok  6 e2e\booking-journey.spec.ts:289:5 › booking form remains readable and accessible at mobile width (3.4s)
+  ok  7 e2e\booking-journey.spec.ts:318:5 › support carries the booking reference into the message (1.9s)
+  ok  8 e2e\booking-journey.spec.ts:331:7 › rental journey fits a mobile screen in fr (4.5s)
+  ok  9 e2e\booking-journey.spec.ts:331:7 › rental journey fits a mobile screen in ar (5.5s)
+  ok 10 e2e\booking-journey.spec.ts:374:7 › marketplace redesign has a clear responsive search in en (7.4s)
+  ok 11 e2e\booking-journey.spec.ts:374:7 › marketplace redesign has a clear responsive search in fr (6.7s)
+  ok 12 e2e\booking-journey.spec.ts:374:7 › marketplace redesign has a clear responsive search in ar (6.8s)
+
+  12 passed (52.3s)

@@ -1,0 +1,89 @@
+
+Running 6 tests using 1 worker
+
+(node:30636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\booking-journey.spec.ts:368:5 › support carries the booking reference into the message (1.6s)
+  ok 2 e2e\booking-journey.spec.ts:533:7 › custom calendar fits mobile and is accessible in fr (3.5s)
+  ok 3 e2e\booking-journey.spec.ts:533:7 › custom calendar fits mobile and is accessible in ar (3.7s)
+  ok 4 e2e\booking-journey.spec.ts:737:5 › rental editor uploads multiple photos, selects a cover and preserves them on save retry (3.6s)
+  x  5 e2e\booking-journey.spec.ts:949:7 › partner dropdowns preserve validation, form values and arrow padding in en (7.1s)
+(node:6928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  6 e2e\booking-journey.spec.ts:949:7 › partner dropdowns preserve validation, form values and arrow padding in ar (8.0s)
+
+
+  1) e2e\booking-journey.spec.ts:949:7 › partner dropdowns preserve validation, form values and arrow padding in en 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.kc-dropdown').filter({ has: locator('select[name="category"]') }).getByRole('combobox')
+    Expected: "true"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.kc-dropdown').filter({ has: locator('select[name="category"]') }).getByRole('combobox') with timeout 5000ms
+      - waiting for locator('.kc-dropdown').filter({ has: locator('select[name="category"]') }).getByRole('combobox')
+        14 × locator resolved to <button type="button" data-value="" role="combobox" aria-required="true" aria-expanded="false" aria-haspopup="listbox" class="kc-select-trigger" aria-labelledby="_R_aaal5esnelb_-label _R_aaal5esnelb_-value">…</button>
+           - unexpected value "null"
+
+
+      971 |         .evaluate((select: HTMLSelectElement) => select.reportValidity()),
+      972 |     ).toBe(false);
+    > 973 |     await expect(specialty).toHaveAttribute("aria-invalid", "true");
+          |                             ^
+      974 |     await expect(specialty).toBeFocused();
+      975 |     await specialty.press("Home");
+      976 |     await specialty.press("Enter");
+        at C:\Users\MohamedElOmary\Personal\MarhireClone\e2e\booking-journey.spec.ts:973:29
+
+    Error Context: test-results\booking-journey-partner-dr-ba109-ues-and-arrow-padding-in-en\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\booking-journey-partner-dr-ba109-ues-and-arrow-padding-in-en\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\booking-journey-partner-dr-ba109-ues-and-arrow-padding-in-en\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e\booking-journey.spec.ts:949:7 › partner dropdowns preserve validation, form values and arrow padding in ar 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.kc-dropdown').filter({ has: locator('select[name="category"]') }).getByRole('combobox')
+    Expected: "true"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.kc-dropdown').filter({ has: locator('select[name="category"]') }).getByRole('combobox') with timeout 5000ms
+      - waiting for locator('.kc-dropdown').filter({ has: locator('select[name="category"]') }).getByRole('combobox')
+        14 × locator resolved to <button type="button" data-value="" role="combobox" aria-required="true" aria-expanded="false" aria-haspopup="listbox" class="kc-select-trigger" aria-labelledby="_R_aaal5esnelb_-label _R_aaal5esnelb_-value">…</button>
+           - unexpected value "null"
+
+
+      971 |         .evaluate((select: HTMLSelectElement) => select.reportValidity()),
+      972 |     ).toBe(false);
+    > 973 |     await expect(specialty).toHaveAttribute("aria-invalid", "true");
+          |                             ^
+      974 |     await expect(specialty).toBeFocused();
+      975 |     await specialty.press("Home");
+      976 |     await specialty.press("Enter");
+        at C:\Users\MohamedElOmary\Personal\MarhireClone\e2e\booking-journey.spec.ts:973:29
+
+    Error Context: test-results\booking-journey-partner-dr-4df71-ues-and-arrow-padding-in-ar\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\booking-journey-partner-dr-4df71-ues-and-arrow-padding-in-ar\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\booking-journey-partner-dr-4df71-ues-and-arrow-padding-in-ar\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    e2e\booking-journey.spec.ts:949:7 › partner dropdowns preserve validation, form values and arrow padding in en 
+    e2e\booking-journey.spec.ts:949:7 › partner dropdowns preserve validation, form values and arrow padding in ar 
+  4 passed (31.7s)

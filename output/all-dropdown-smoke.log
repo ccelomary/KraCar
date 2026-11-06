@@ -1,0 +1,52 @@
+
+Running 7 tests using 1 worker
+
+(node:21256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\booking-journey.spec.ts:306:5 › service choices work with the keyboard and calendar prevents reversed dates (4.9s)
+  x  2 e2e\booking-journey.spec.ts:368:5 › support carries the booking reference into the message (6.2s)
+(node:6044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 e2e\booking-journey.spec.ts:484:5 › custom calendar supports keyboard dates, 24-hour time, apply and cancel (5.3s)
+  ok 4 e2e\booking-journey.spec.ts:654:5 › custom dropdown keyboard selection submits the selected city (2.4s)
+  ok 5 e2e\booking-journey.spec.ts:685:5 › language menu supports keyboard switching and RTL on mobile (4.5s)
+  ok 6 e2e\booking-journey.spec.ts:714:5 › city dropdown closes outside and filters immediately (2.5s)
+  ok 7 e2e\booking-journey.spec.ts:733:5 › rental editor uploads multiple photos, selects a cover and preserves them on save retry (3.8s)
+
+
+  1) e2e\booking-journey.spec.ts:368:5 › support carries the booking reference into the message ────
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByRole('combobox', { name: 'What can we help with?', exact: true })
+    Expected: "Existing reservation"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" getByRole('combobox', { name: 'What can we help with?', exact: true }) with timeout 5000ms
+      - waiting for getByRole('combobox', { name: 'What can we help with?', exact: true })
+
+
+      376 |   await expect(
+      377 |     page.getByRole("combobox", { name: "What can we help with?", exact: true }),
+    > 378 |   ).toHaveValue("Existing reservation");
+          |     ^
+      379 | });
+      380 | for (const locale of ["fr", "ar"] as const) {
+      381 |   test(`rental journey fits a mobile screen in ${locale}`, async ({ page }) => {
+        at C:\Users\MohamedElOmary\Personal\MarhireClone\e2e\booking-journey.spec.ts:378:5
+
+    Error Context: test-results\booking-journey-support-ca-4fea5--reference-into-the-message\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\booking-journey-support-ca-4fea5--reference-into-the-message\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\booking-journey-support-ca-4fea5--reference-into-the-message\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e\booking-journey.spec.ts:368:5 › support carries the booking reference into the message ─────
+  6 passed (33.2s)

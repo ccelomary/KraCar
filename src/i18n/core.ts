@@ -24,7 +24,7 @@ export function resolveLocale(saved: unknown, acceptLanguage = ""): Locale {
     .filter((entry) => entry.quality > 0)
     .sort((a, b) => b.quality - a.quality || a.index - b.index);
   const supported = candidates.find((entry) => isLocale(entry.language));
-  return supported && isLocale(supported.language) ? supported.language : "en";
+  return supported && isLocale(supported.language) ? supported.language : "fr";
 }
 export function createTranslator(locale: Locale, messages: Messages) {
   const translate = (

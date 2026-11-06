@@ -1,0 +1,22 @@
+
+Running 15 tests using 1 worker
+
+(node:27588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 e2e\booking-journey.spec.ts:187:5 › rental request progresses through details and review without charging or losing edits (4.8s)
+  ok  2 e2e\booking-journey.spec.ts:242:5 › sign-in preserves selected rental dates and extras (4.3s)
+  ok  3 e2e\booking-journey.spec.ts:269:5 › customer overview focuses on bookings and hides business finance metrics (1.6s)
+  ok  4 e2e\booking-journey.spec.ts:289:5 › signed-in workspace failures offer retry without asking for another login (1.5s)
+  ok  5 e2e\booking-journey.spec.ts:303:5 › service choices work with the keyboard and calendar prevents reversed dates (4.2s)
+  ok  6 e2e\booking-journey.spec.ts:335:5 › booking form remains readable and accessible at mobile width (2.8s)
+  ok  7 e2e\booking-journey.spec.ts:364:5 › support carries the booking reference into the message (1.1s)
+  ok  8 e2e\booking-journey.spec.ts:377:7 › rental journey fits a mobile screen in fr (2.6s)
+  ok  9 e2e\booking-journey.spec.ts:377:7 › rental journey fits a mobile screen in ar (3.0s)
+  ok 10 e2e\booking-journey.spec.ts:420:7 › marketplace redesign has a clear responsive search in en (4.8s)
+  ok 11 e2e\booking-journey.spec.ts:420:7 › marketplace redesign has a clear responsive search in fr (5.3s)
+  ok 12 e2e\booking-journey.spec.ts:420:7 › marketplace redesign has a clear responsive search in ar (4.8s)
+  ok 13 e2e\booking-journey.spec.ts:480:5 › custom calendar supports keyboard dates, 24-hour time, apply and cancel (5.2s)
+  ok 14 e2e\booking-journey.spec.ts:526:7 › custom calendar fits mobile and is accessible in fr (3.4s)
+  ok 15 e2e\booking-journey.spec.ts:526:7 › custom calendar fits mobile and is accessible in ar (3.5s)
+
+  15 passed (57.0s)

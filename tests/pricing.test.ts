@@ -16,7 +16,7 @@ test("rental quote adds cover and seats in integer cents and separates deposit",
     1,
   );
   assert.equal(result.days, 4);
-  assert.equal(result.total, 24800);
+  assert.equal(result.total, 26040);
   assert.equal(result.deposit, 50000);
 });
 test("calendar billing remains four days across a daylight-saving boundary", () => {
@@ -31,7 +31,7 @@ test("activity prices multiply guests, not duration or car cover", () => {
     1,
     3,
   );
-  assert.equal(result.total, 13500);
+  assert.equal(result.total, 14175);
   assert.equal(result.deposit, 0);
 });
 test("invalid dates, protection, capacity and excessive duration are rejected", () => {

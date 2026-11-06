@@ -75,12 +75,20 @@ export function quote(
     listing.price * days * (listing.category === "activities" ? guests : 1);
   const cover = listing.category === "cars" ? plan.price * days : 0;
   const addOns = listing.category === "cars" ? extras * 500 * days : 0;
+  const partnerTotal = base + cover + addOns;
+  const serviceFee = Math.round(partnerTotal * 0.05);
+  const advance = Math.round(partnerTotal * 0.1);
   return {
+    partnerTotal,
+    serviceFee,
+    advance,
+    prepayment: advance + serviceFee,
+    balance: partnerTotal - advance,
     days,
     base,
     cover,
     addOns,
-    total: base + cover + addOns,
+    total: partnerTotal + serviceFee,
     deposit: listing.category === "cars" ? plan.deposit : 0,
     excess: listing.category === "cars" ? plan.excess : 0,
   };

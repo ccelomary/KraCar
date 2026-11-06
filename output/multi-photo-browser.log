@@ -1,0 +1,9 @@
+
+Running 2 tests using 1 worker
+
+(node:24788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\booking-journey.spec.ts:729:5 › rental editor uploads multiple photos, selects a cover and preserves them on save retry (3.6s)
+  ok 2 e2e\booking-journey.spec.ts:856:5 › customers can browse every saved car photo (1.7s)
+
+  2 passed (6.9s)

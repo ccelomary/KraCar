@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:25176) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\booking-journey.spec.ts:650:5 › custom dropdown keyboard selection submits the selected city (2.2s)
+  ok 2 e2e\booking-journey.spec.ts:681:5 › language menu supports keyboard switching and RTL on mobile (3.7s)
+  ok 3 e2e\booking-journey.spec.ts:710:5 › city dropdown closes outside and filters immediately (1.7s)
+
+  3 passed (9.6s)

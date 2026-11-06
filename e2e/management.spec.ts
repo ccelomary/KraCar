@@ -1,3 +1,4 @@
+import { selectDropdown } from "./support/select";
 import { test, expect } from "@playwright/test";
 import { MongoClient } from "mongodb";
 import { randomUUID, scryptSync } from "node:crypto";
@@ -107,7 +108,7 @@ test("agency contacts, physical fleet and invoicing persist with tenant and conc
       .fill("QA 1234");
     await page.getByLabel("Mileage (km)", { exact: true }).fill("51000");
     await page.getByLabel(/^Next service mileage/).fill("50000");
-    await page.getByLabel("Operating status").selectOption("maintenance");
+    await selectDropdown(page.getByLabel("Operating status"), "maintenance");
     await page
       .getByRole("button", { name: "Save record", exact: true })
       .click();
@@ -121,9 +122,10 @@ test("agency contacts, physical fleet and invoicing persist with tenant and conc
     await page
       .getByRole("button", { name: "New invoice", exact: true })
       .click();
-    await page
-      .getByRole("combobox", { name: "Customer", exact: true })
-      .selectOption(contact.id);
+    await selectDropdown(
+      page.getByRole("combobox", { name: "Customer", exact: false }),
+      contact.id,
+    );
     await page.getByLabel("Description", { exact: true }).fill("Car rental");
     await page.getByLabel("Quantity", { exact: true }).fill("2");
     await page.getByLabel("Unit price", { exact: true }).fill("50");

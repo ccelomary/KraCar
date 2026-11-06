@@ -11,6 +11,7 @@ export const cities = [
   "Tangier",
   "Essaouira",
   "Fes",
+  "Khenifra",
 ];
 export const seedAgencies: Agency[] = [
   {

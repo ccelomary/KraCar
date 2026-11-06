@@ -1,0 +1,30 @@
+
+Running 23 tests using 1 worker
+
+(node:28676) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 e2e\booking-journey.spec.ts:187:5 › rental request progresses through details and review without charging or losing edits (4.4s)
+  ok  2 e2e\booking-journey.spec.ts:242:5 › sign-in preserves selected rental dates and extras (4.1s)
+  ok  3 e2e\booking-journey.spec.ts:269:5 › customer overview focuses on bookings and hides business finance metrics (2.4s)
+  ok  4 e2e\booking-journey.spec.ts:289:5 › signed-in workspace failures offer retry without asking for another login (1.9s)
+  ok  5 e2e\booking-journey.spec.ts:303:5 › service choices work with the keyboard and calendar prevents reversed dates (5.4s)
+  ok  6 e2e\booking-journey.spec.ts:335:5 › booking form remains readable and accessible at mobile width (8.1s)
+  ok  7 e2e\booking-journey.spec.ts:364:5 › support carries the booking reference into the message (2.4s)
+  ok  8 e2e\booking-journey.spec.ts:377:7 › rental journey fits a mobile screen in fr (4.4s)
+  ok  9 e2e\booking-journey.spec.ts:377:7 › rental journey fits a mobile screen in ar (3.6s)
+  ok 10 e2e\booking-journey.spec.ts:420:7 › marketplace redesign has a clear responsive search in en (5.4s)
+  ok 11 e2e\booking-journey.spec.ts:420:7 › marketplace redesign has a clear responsive search in fr (5.1s)
+  ok 12 e2e\booking-journey.spec.ts:420:7 › marketplace redesign has a clear responsive search in ar (5.2s)
+  ok 13 e2e\booking-journey.spec.ts:480:5 › custom calendar supports keyboard dates, 24-hour time, apply and cancel (5.8s)
+  ok 14 e2e\booking-journey.spec.ts:526:7 › custom calendar fits mobile and is accessible in fr (4.4s)
+  ok 15 e2e\booking-journey.spec.ts:526:7 › custom calendar fits mobile and is accessible in ar (3.8s)
+  ok 16 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 507x503 (ar) (2.5s)
+  ok 17 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 760x500 (ar) (2.5s)
+  ok 18 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 900x600 (en) (2.3s)
+  ok 19 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 390x568 (fr) (2.4s)
+  ok 20 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 390x480 (ar) (2.6s)
+  ok 21 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 844x390 (ar) (2.7s)
+  ok 22 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 390x360 (ar) (2.5s)
+  ok 23 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 1280x720 (en) (2.6s)
+
+  23 passed (1.5m)

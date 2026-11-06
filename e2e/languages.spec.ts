@@ -1,3 +1,4 @@
+import { selectDropdown } from "./support/select";
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 test.beforeEach(async ({ page, context }, testInfo) => {
@@ -54,18 +55,20 @@ test("switching languages preserves search and booking state, canonical values a
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
-  await page
-    .getByRole("combobox", { name: "Destination", exact: true })
-    .selectOption("Marrakech");
+  await selectDropdown(
+    page.getByRole("combobox", { name: "Destination", exact: false }),
+    "Marrakech",
+  );
   await page.getByLabel("Pickup date", { exact: true }).fill(future(8));
   await page.getByLabel("Return date", { exact: true }).fill(future(12));
-  await page
-    .getByRole("combobox", { name: "Language", exact: true })
-    .selectOption("fr");
+  await selectDropdown(
+    page.getByRole("combobox", { name: "Language", exact: false }),
+    "fr",
+  );
   await expect(page.locator("html")).toHaveAttribute("lang", "fr");
   await expect(
-    page.getByRole("combobox", { name: "Destination", exact: true }),
-  ).toHaveValue("Marrakech");
+    page.getByRole("combobox", { name: "Destination", exact: false }),
+  ).toHaveAttribute("data-value", "Marrakech");
   await expect(page.getByLabel("Date de départ", { exact: true })).toHaveValue(
     future(8),
   );
@@ -85,9 +88,10 @@ test("switching languages preserves search and booking state, canonical values a
   await expect(
     page.getByRole("link", { name: "Voir Dacia Duster à Marrakech" }),
   ).toHaveCount(0);
-  await page
-    .getByRole("combobox", { name: "Langue", exact: true })
-    .selectOption("ar");
+  await selectDropdown(
+    page.getByRole("combobox", { name: "Langue", exact: false }),
+    "ar",
+  );
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
   await expect(
     page.getByRole("checkbox", { name: "أوتوماتيكي", exact: true }),
@@ -106,9 +110,10 @@ test("switching languages preserves search and booking state, canonical values a
     .getByLabel("مكان الاستلام", { exact: true })
     .fill("مطار مراكش، قاعة الوصول");
   await page.getByRole("button", { name: "متابعة", exact: true }).click();
-  await page
-    .getByRole("combobox", { name: "اللغة", exact: true })
-    .selectOption("fr");
+  await selectDropdown(
+    page.getByRole("combobox", { name: "اللغة", exact: false }),
+    "fr",
+  );
   await expect(page.getByRole("radio", { name: /Confort/ })).toBeVisible();
   await page.getByRole("radio", { name: /Confort/ }).check();
   await page.getByRole("button", { name: "Continuer", exact: true }).click();
@@ -145,9 +150,10 @@ test("switching languages preserves search and booking state, canonical values a
       name: "Demande reçue. L’aventure vous attend.",
     }),
   ).toBeVisible();
-  await page
-    .getByRole("combobox", { name: "Langue", exact: true })
-    .selectOption("ar");
+  await selectDropdown(
+    page.getByRole("combobox", { name: "Langue", exact: false }),
+    "ar",
+  );
   await expect(
     page.getByRole("heading", { name: "وصل طلبك. والمغامرة تنتظرك." }),
   ).toBeVisible();
@@ -191,13 +197,14 @@ test("French agency and Arabic platform dashboards remain usable on desktop and 
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(
     page.getByRole("dialog").getByRole("combobox", { name: /Catégorie/ }),
-  ).toHaveValue("cars");
+  ).toHaveAttribute("data-value", "cars");
   await page.getByRole("button", { name: "Enregistrer l’offre" }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.goto("/login");
-  await page
-    .getByRole("combobox", { name: "Langue", exact: true })
-    .selectOption("ar");
+  await selectDropdown(
+    page.getByRole("combobox", { name: "Langue", exact: false }),
+    "ar",
+  );
   await page.getByRole("button", { name: "تجربة المنصة" }).click();
   await expect(
     page.getByRole("heading", { name: /منصتك في لمحة/ }),

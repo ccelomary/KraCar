@@ -6,6 +6,7 @@
 @import "./accessibility.css";
 @import "./contracts.css";
 @import "./car-photos.css";
+@import "./kracar.css";
 * {
   box-sizing: border-box;
 }

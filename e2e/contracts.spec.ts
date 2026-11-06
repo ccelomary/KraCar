@@ -1,3 +1,4 @@
+import { selectDropdown } from "./support/select";
 import { test, expect, type Page } from "@playwright/test";
 import { MongoClient } from "mongodb";
 import { randomUUID, scryptSync } from "node:crypto";
@@ -159,12 +160,14 @@ test("agency contracts persist, issue immutably, print, record returns and enfor
       name: "New contract",
       exact: true,
     });
-    await dialog
-      .getByRole("combobox", { name: "Customer", exact: true })
-      .selectOption(contactId);
-    await dialog
-      .getByRole("combobox", { name: "Vehicle", exact: true })
-      .selectOption(vehicleId);
+    await selectDropdown(
+      dialog.getByRole("combobox", { name: "Customer", exact: false }),
+      contactId,
+    );
+    await selectDropdown(
+      dialog.getByRole("combobox", { name: "Vehicle", exact: false }),
+      vehicleId,
+    );
     await dialog
       .getByLabel("Driving licence number", { exact: true })
       .fill("QA-DRIVING-LICENCE");
@@ -176,14 +179,19 @@ test("agency contracts persist, issue immutably, print, record returns and enfor
     await dialog
       .getByLabel("Return location", { exact: true })
       .fill("QA city return");
-    await dialog
-      .getByRole("combobox", { name: "Currency", exact: true })
-      .selectOption("MAD");
+    await selectDropdown(
+      dialog.getByRole("combobox", { name: "Currency", exact: false }),
+      "MAD",
+    );
     await dialog.getByLabel("Daily rental rate", { exact: true }).fill("1200");
     await dialog.getByLabel("Refundable deposit", { exact: true }).fill("2000");
-    await dialog
-      .getByRole("combobox", { name: "Linked invoice (optional)", exact: true })
-      .selectOption(invoiceId);
+    await selectDropdown(
+      dialog.getByRole("combobox", {
+        name: "Linked invoice (optional)",
+        exact: false,
+      }),
+      invoiceId,
+    );
     await dialog
       .getByLabel("Vehicle condition at pickup", { exact: true })
       .fill("QA clean vehicle, existing scratch on rear bumper.");

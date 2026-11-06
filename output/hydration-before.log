@@ -1,0 +1,45 @@
+
+Running 2 tests using 1 worker
+
+(node:25296) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\booking-journey.spec.ts:891:7 › server and browser hydrate consistently with the current date (8.8s)
+  x  2 e2e\booking-journey.spec.ts:891:7 › server and browser hydrate consistently with a different browser date (7.6s)
+
+
+  1) e2e\booking-journey.spec.ts:891:7 › server and browser hydrate consistently with a different browser date 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('listbox')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('listbox') with timeout 5000ms
+      - waiting for getByRole('listbox')
+
+
+      901 |       await expect(page.locator(".language-switcher [role=combobox]")).toBeVisible();
+      902 |       await page.locator(".language-switcher [role=combobox]").click();
+    > 903 |       await expect(page.getByRole("listbox")).toBeVisible();
+          |                                               ^
+      904 |       await page.keyboard.press("Escape");
+      905 |       expect(hydrationErrors, `Hydration errors on ${url}`).toEqual([]);
+      906 |     }
+        at C:\Users\MohamedElOmary\Personal\MarhireClone\e2e\booking-journey.spec.ts:903:47
+
+    Error Context: test-results\booking-journey-server-and-462f5-th-a-different-browser-date\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\booking-journey-server-and-462f5-th-a-different-browser-date\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\booking-journey-server-and-462f5-th-a-different-browser-date\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e\booking-journey.spec.ts:891:7 › server and browser hydrate consistently with a different browser date 
+  1 passed (18.5s)

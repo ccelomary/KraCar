@@ -95,6 +95,10 @@ export interface DashboardData {
 }
 
 export interface Contact {
+  clientType?: "individual" | "company";
+  country?: string;
+  ICE?: string;
+  billingName?: string;
   id: string;
   agencyId: string;
   version: number;

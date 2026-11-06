@@ -1,0 +1,18 @@
+.brand-wordmark {
+  display: block;
+  flex-shrink: 0;
+  width: 142px;
+  height: 32px;
+  background: currentColor;
+  mask: url("/brand/kracar-wordmark-web-v5.png") center / contain no-repeat;
+}
+.public-footer .brand-wordmark {
+  width: 160px;
+  height: 36px;
+}
+@media (max-width: 640px) {
+  .public-header .brand-wordmark {
+    width: 116px;
+    height: 27px;
+  }
+}

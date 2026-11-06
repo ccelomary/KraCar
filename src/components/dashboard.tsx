@@ -1,4 +1,5 @@
 "use client";
+import Dropdown from "./dropdown";
 import { useTranslations } from "@/i18n/provider";
 import { matchesSearch } from "@/i18n/search";
 import LanguageSwitcher from "./language-switcher";
@@ -85,7 +86,7 @@ const sectionNames: Record<string, string> = {
   agencies: "Agencies",
   support: "Support inbox",
   settings: "Settings",
-  contacts: "Contacts",
+  contacts: "Clients",
   vehicles: "Fleet overview",
   invoices: "Invoices",
   contracts: "Contracts",
@@ -115,7 +116,7 @@ const navigation: {
     icon: CarFront,
     roles: ["agency"],
   },
-  { id: "contacts", label: "Contacts", icon: Users, roles: ["agency"] },
+  { id: "contacts", label: "Clients", icon: Users, roles: ["agency"] },
   { id: "invoices", label: "Invoices", icon: FileText, roles: ["agency"] },
   { id: "contracts", label: "Contracts", icon: FileText, roles: ["agency"] },
   { id: "agencies", label: "Agencies", icon: Building2, roles: ["platform"] },
@@ -438,6 +439,10 @@ export default function Dashboard({
         </div>
         <div className="nav-label">{t("Workspace")}</div>
         <nav className="side-nav" aria-label={t("Workspace navigation")}>
+          <Link href="/workspace" className="side-link">
+            <CarFront aria-hidden="true" size={18} />
+            {t("KraCar rental operations")}
+          </Link>
           {navigation
             .filter((n) => n.roles.includes(role))
             .map((n) => (
@@ -680,7 +685,9 @@ export default function Dashboard({
                       </p>
                     </div>
                     <div className="row">
-                      <select
+                      <Dropdown
+                        label={t("Reporting period")}
+                        hideLabel
                         className="period-select"
                         value={period}
                         onChange={(e) => setPeriod(+e.target.value)}
@@ -689,7 +696,7 @@ export default function Dashboard({
                         <option value={7}>{t("Last 7 days")}</option>
                         <option value={30}>{t("Last 30 days")}</option>
                         <option value={90}>{t("Last 90 days")}</option>
-                      </select>
+                      </Dropdown>
                       <button
                         className="button secondary"
                         onClick={() => {
@@ -1072,7 +1079,9 @@ export default function Dashboard({
                             )}
                           />
                         </div>
-                        <select
+                        <Dropdown
+                          label={t("Filter by reservation status")}
+                          hideLabel
                           value={status}
                           onChange={(e) => setStatus(e.target.value)}
                           aria-label={t("Filter by reservation status")}
@@ -1082,7 +1091,7 @@ export default function Dashboard({
                               {t(label)}
                             </option>
                           ))}
-                        </select>
+                        </Dropdown>
                         <span
                           className="muted"
                           style={{ fontSize: ".7rem", marginLeft: "auto" }}
@@ -1141,7 +1150,9 @@ export default function Dashboard({
                         "1": listings.length,
                       })}
                     </span>
-                    <select
+                    <Dropdown
+                      label={t("Listing visibility")}
+                      hideLabel
                       aria-label={t("Listing visibility")}
                       value={listingVisibility}
                       onChange={(e) => setListingVisibility(e.target.value)}
@@ -1149,8 +1160,10 @@ export default function Dashboard({
                       <option value="all">{t("All visibility states")}</option>
                       <option value="published">{t("Published")}</option>
                       <option value="archived">{t("Archived")}</option>
-                    </select>
-                    <select
+                    </Dropdown>
+                    <Dropdown
+                      label={t("Service category")}
+                      hideLabel
                       aria-label={t("Service category")}
                       value={listingCategory}
                       onChange={(e) => setListingCategory(e.target.value)}
@@ -1161,7 +1174,7 @@ export default function Dashboard({
                           {t(c.label)}
                         </option>
                       ))}
-                    </select>
+                    </Dropdown>
                   </div>
                   {visibleListings.length ? (
                     <div className="listing-grid">
@@ -1340,19 +1353,20 @@ export default function Dashboard({
                         <span>{item.count}</span>
                       </button>
                     ))}
-                    <label className="network-sort">
-                      <span className="sr-only">{t("Sort agencies")}</span>
-                      <select
-                        value={agencySort}
-                        onChange={(e) => setAgencySort(e.target.value)}
-                        aria-label={t("Sort agencies")}
-                      >
-                        <option value="review">
-                          {t("Review queue first")}
-                        </option>
-                        <option value="name">{t("Name A–Z")}</option>
-                      </select>
-                    </label>
+                    <Dropdown
+                      label={
+                        <>
+                          <span className="sr-only">{t("Sort agencies")}</span>
+                        </>
+                      }
+                      hideLabel
+                      value={agencySort}
+                      onChange={(e) => setAgencySort(e.target.value)}
+                      aria-label={t("Sort agencies")}
+                    >
+                      <option value="review">{t("Review queue first")}</option>
+                      <option value="name">{t("Name A–Z")}</option>
+                    </Dropdown>
                   </div>
                   <p className="filter-summary" role="status">
                     {t("Showing {0} of {1} agencies", {

@@ -2,25 +2,13 @@
 import { useTranslations } from "@/i18n/provider";
 import { useEffect, useRef, useId, type ReactNode } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Mountain, X, Inbox, Check } from "lucide-react";
+import { ArrowUpRight, X, Inbox, Check } from "lucide-react";
 export function Brand() {
   const t = useTranslations();
   return (
     <Link href="/" className="brand">
-      <span className="brand-mark">
-        <Mountain
-          aria-hidden="true"
-          focusable="false"
-          size={24}
-          strokeWidth={1.6}
-        />
-      </span>
-      <span>
-        {t("atlas")}
-        <span className="muted">{t(" journeys")}</span>
-        <small>{t("Made for the journey")}</small>
-      </span>
-      <span className="sr-only">{t("Atlas Journeys home")}</span>
+      <span className="brand-wordmark" aria-hidden="true" />
+      <span className="sr-only">{t("KraCar home")}</span>
     </Link>
   );
 }

@@ -1,0 +1,464 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("KRACAR_MONGODB_URI")
+}
+
+model User {
+  id            String    @id @map("_id")
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @map("_id")
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @map("_id")
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @map("_id")
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Agency {
+  id        String         @id @default(uuid()) @map("_id")
+  name      String
+  status    String         @default("pending")
+  city      String
+  email     String
+  business  Json           @default("{}")
+  terms     Json           @default("{}")
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  members   AgencyMember[]
+  vehicles  Vehicle[]
+}
+
+model AgencyMember {
+  id          String   @id @default(uuid()) @map("_id")
+  agencyId    String
+  userId      String
+  role        String   @default("staff")
+  permissions String[] @default([])
+  active      Boolean  @default(true)
+  agency      Agency   @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+
+  @@unique([agencyId, userId])
+  @@index([userId])
+}
+
+model VerificationDocument {
+  id        String   @id @default(uuid()) @map("_id")
+  agencyId  String
+  storageId String
+  kind      String
+  status    String   @default("pending")
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@index([agencyId])
+}
+
+model Vehicle {
+  id             String              @id @default(uuid()) @map("_id")
+  agencyId       String
+  name           String
+  plate          String
+  city           String
+  category       String              @default("economy")
+  transmission   String              @default("manual")
+  fuel           String              @default("diesel")
+  seats          Int                 @default(5)
+  features       String[]            @default([])
+  images         Json                @default("[]")
+  dailyRate      Int
+  deposit        Int                 @default(0)
+  weeklyDiscount Int                 @default(0)
+  monthlyRate    Int?
+  extras         Json                @default("[]")
+  conditions     Json                @default("{}")
+  status         String              @default("draft")
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  agency         Agency              @relation(fields: [agencyId], references: [id], onDelete: Restrict)
+  rules          PricingRule[]
+  bookings       Booking[]
+  allocations    AvailabilityBlock[]
+
+  @@unique([agencyId, plate])
+  @@index([city, status, agencyId])
+}
+
+model PricingRule {
+  id        String   @id @default(uuid()) @map("_id")
+  vehicleId String
+  start     DateTime
+  end       DateTime
+  dailyRate Int
+  priority  Int      @default(0)
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, start, end])
+}
+
+model Booking {
+  id                 String              @id @default(uuid()) @map("_id")
+  reference          String              @unique
+  idempotencyKey     String              @unique
+  customerId         String?
+  agencyId           String
+  requestingAgencyId String?
+  vehicleId          String
+  source             String              @default("marketplace")
+  status             String              @default("requested")
+  start              DateTime
+  end                DateTime
+  customer           Json
+  pickup             String
+  dropoff            String
+  quote              Json
+  cancellation       Json?
+  version            Int                 @default(1)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  vehicle            Vehicle             @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
+  allocations        AvailabilityBlock[]
+
+  @@index([agencyId, status, start])
+  @@index([customerId])
+  @@index([requestingAgencyId])
+}
+
+model AvailabilityBlock {
+  id        String   @id @default(uuid()) @map("_id")
+  vehicleId String
+  agencyId  String
+  bookingId String?
+  start     DateTime
+  end       DateTime
+  reason    String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
+  booking   Booking? @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+
+  @@index([vehicleId, start, end])
+  @@index([agencyId])
+}
+
+model ContractTemplate {
+  id        String   @id @default(uuid()) @map("_id")
+  agencyId  String
+  language  String   @default("fr")
+  name      String
+  clauses   String
+  updatedAt DateTime @updatedAt
+
+  @@index([agencyId])
+}
+
+model RentalContract {
+  id             String            @id @default(uuid()) @map("_id")
+  agencyId       String
+  bookingId      String
+  number         String?
+  currentVersion Int               @default(1)
+  status         String            @default("draft")
+  createdAt      DateTime          @default(now())
+  versions       ContractVersion[]
+
+  @@unique([agencyId, bookingId])
+  @@index([agencyId, status])
+}
+
+model ContractVersion {
+  id         String         @id @default(uuid()) @map("_id")
+  contractId String
+  version    Int
+  snapshot   Json
+  language   String         @default("fr")
+  createdAt  DateTime       @default(now())
+  contract   RentalContract @relation(fields: [contractId], references: [id], onDelete: Restrict)
+  signatures Signature[]
+
+  @@unique([contractId, version])
+}
+
+model Signature {
+  id        String          @id @default(uuid()) @map("_id")
+  versionId String
+  party     String
+  signer    String
+  actorId   String
+  evidence  String
+  signedAt  DateTime        @default(now())
+  version   ContractVersion @relation(fields: [versionId], references: [id], onDelete: Restrict)
+
+  @@unique([versionId, party])
+}
+
+model HandoverReport {
+  id        String   @id @default(uuid()) @map("_id")
+  agencyId  String
+  bookingId String
+  kind      String
+  mileage   Int
+  fuel      String
+  equipment String
+  damage    Json
+  notes     String
+  actorId   String
+  createdAt DateTime @default(now())
+
+  @@unique([bookingId, kind])
+  @@index([agencyId])
+}
+
+model FinancialDocument {
+  id            String              @id @default(uuid()) @map("_id")
+  agencyId      String
+  customerId    String?
+  bookingId     String?
+  kind          String
+  issuer        String              @default("agency")
+  status        String              @default("draft")
+  number        String?
+  currency      String              @default("MAD")
+  obligationKey String?
+  originalId    String?
+  snapshot      Json
+  total         Int
+  paid          Int                 @default(0)
+  credited      Int                 @default(0)
+  dueAt         DateTime
+  createdAt     DateTime            @default(now())
+  issuedAt      DateTime?
+  allocations   PaymentAllocation[]
+
+  @@index([agencyId, kind, number])
+  @@index([agencyId, kind, status])
+  @@index([customerId])
+}
+
+model DocumentSequence {
+  id    String @id @map("_id")
+  value Int    @default(0)
+}
+
+model Payment {
+  id           String              @id @default(uuid()) @map("_id")
+  agencyId     String
+  bookingId    String?
+  customerId   String?
+  amount       Int
+  refunded     Int                 @default(0)
+  method       String
+  recipient    String              @default("agency")
+  verification String
+  reference    String
+  recordedBy   String
+  eventKey     String              @unique
+  createdAt    DateTime            @default(now())
+  allocations  PaymentAllocation[]
+
+  @@index([agencyId, bookingId])
+  @@index([customerId])
+}
+
+model PaymentAllocation {
+  id        String            @id @default(uuid()) @map("_id")
+  paymentId String
+  invoiceId String
+  amount    Int
+  payment   Payment           @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  invoice   FinancialDocument @relation(fields: [invoiceId], references: [id], onDelete: Restrict)
+
+  @@unique([paymentId, invoiceId])
+}
+
+model Refund {
+  id          String   @id @default(uuid()) @map("_id")
+  agencyId    String
+  paymentId   String
+  amount      Int
+  reason      String
+  status      String   @default("requested")
+  requestedBy String
+  approvedBy  String?
+  eventKey    String   @unique
+  createdAt   DateTime @default(now())
+
+  @@index([agencyId, status])
+}
+
+model SecurityDeposit {
+  id        String @id @default(uuid()) @map("_id")
+  agencyId  String
+  bookingId String @unique
+  required  Int
+  received  Int    @default(0)
+  retained  Int    @default(0)
+  refunded  Int    @default(0)
+  status    String @default("required")
+  evidence  Json   @default("[]")
+
+  @@index([agencyId])
+}
+
+model LedgerEntry {
+  id        String   @id @default(uuid()) @map("_id")
+  eventKey  String
+  agencyId  String
+  account   String
+  amount    Int
+  createdAt DateTime @default(now())
+
+  @@unique([eventKey, account])
+  @@index([agencyId, account])
+}
+
+model Payout {
+  id         String   @id @default(uuid()) @map("_id")
+  agencyId   String
+  amount     Int
+  status     String   @default("requested")
+  reference  String?
+  recordedBy String
+  createdAt  DateTime @default(now())
+
+  @@index([agencyId, status])
+}
+
+model Review {
+  id         String   @id @default(uuid()) @map("_id")
+  bookingId  String   @unique
+  vehicleId  String
+  customerId String
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+
+  @@index([vehicleId])
+}
+
+model Notification {
+  id        String    @id @default(uuid()) @map("_id")
+  userId    String
+  agencyId  String?
+  message   String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, readAt])
+}
+
+model EmailPreview {
+  id        String   @id @default(uuid()) @map("_id")
+  recipient String
+  subject   String
+  body      String
+  createdAt DateTime @default(now())
+}
+
+model AuditEvent {
+  id        String   @id @default(uuid()) @map("_id")
+  agencyId  String?
+  actorId   String
+  action    String
+  recordId  String
+  details   Json     @default("{}")
+  createdAt DateTime @default(now())
+
+  @@index([agencyId, createdAt])
+}
+
+model PlatformConfig {
+  id    String @id @default("fees") @map("_id")
+  value Json
+}
+
+model StorageObject {
+  id        String   @id @default(uuid()) @map("_id")
+  agencyId  String
+  ownerId   String
+  mime      String
+  name      String
+  data      Bytes
+  public    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([agencyId])
+}
+
+model WalletRequest {
+  id          String   @id @default(uuid()) @map("_id")
+  agencyId    String
+  kind        String
+  amount      Int
+  status      String   @default("requested")
+  requestedBy String
+  approvedBy  String?
+  reference   String
+  createdAt   DateTime @default(now())
+
+  @@index([agencyId, status])
+}
+
+model BackgroundJob {
+  id        String   @id @map("_id")
+  kind      String
+  payload   Json
+  attempts  Int      @default(0)
+  status    String   @default("pending")
+  nextAt    DateTime @default(now())
+  lastError String?
+  createdAt DateTime @default(now())
+
+  @@index([status, nextAt])
+}

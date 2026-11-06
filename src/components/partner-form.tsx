@@ -1,4 +1,5 @@
 "use client";
+import Dropdown from "./dropdown";
 import { useTranslations } from "@/i18n/provider";
 import { useRef, useState } from "react";
 import Link from "next/link";
@@ -147,42 +148,38 @@ export default function PartnerForm() {
             </small>
           </label>
           <div className="field-grid">
-            <label>
-              {t("Your specialty")}
-              <select
-                name="category"
-                aria-label={t("Your specialty")}
-                required
-                defaultValue=""
-              >
-                <option value="" disabled>
-                  {t("Choose your service")}
+            <Dropdown
+              label={<>{t("Your specialty")}</>}
+              name="category"
+              aria-label={t("Your specialty")}
+              required
+              defaultValue=""
+            >
+              <option value="" disabled>
+                {t("Choose your service")}
+              </option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {t(c.label)}
                 </option>
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {t(c.label)}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              {t("Primary city")}
-              <select
-                name="city"
-                aria-label={t("Primary city")}
-                required
-                defaultValue=""
-              >
-                <option value="" disabled>
-                  {t("Choose your city")}
+              ))}
+            </Dropdown>
+            <Dropdown
+              label={<>{t("Primary city")}</>}
+              name="city"
+              aria-label={t("Primary city")}
+              required
+              defaultValue=""
+            >
+              <option value="" disabled>
+                {t("Choose your city")}
+              </option>
+              {cities.map((c) => (
+                <option key={c} value={c}>
+                  {t(c)}
                 </option>
-                {cities.map((c) => (
-                  <option key={c} value={c}>
-                    {t(c)}
-                  </option>
-                ))}
-              </select>
-            </label>
+              ))}
+            </Dropdown>
             <label>
               {t("Commercial registration number")}
               <input
@@ -270,13 +267,13 @@ export default function PartnerForm() {
           <label className="check-label">
             <input type="checkbox" name="consent" required />
             <span>
-              {t("I accept the booking terms and privacy notice.")}{" "}
+              {t("I accept the partnership terms and privacy notice.")}{" "}
               <Link
-                href="/policies/terms"
+                href="/policies/partnership"
                 target="_blank"
                 className="text-link"
               >
-                {t("Booking terms")}
+                {t("Partnership agreement")}
               </Link>
               {" · "}
               <Link

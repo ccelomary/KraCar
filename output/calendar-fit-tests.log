@@ -1,0 +1,15 @@
+
+Running 8 tests using 1 worker
+
+(node:28844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 507x503 (ar) (2.6s)
+  ok 2 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 760x500 (ar) (2.1s)
+  ok 3 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 900x600 (en) (1.9s)
+  ok 4 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 390x568 (fr) (1.8s)
+  ok 5 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 390x480 (ar) (2.1s)
+  ok 6 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 844x390 (ar) (2.4s)
+  ok 7 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 390x360 (ar) (2.7s)
+  ok 8 e2e\booking-journey.spec.ts:576:7 › calendar needs no internal scrolling at 1280x720 (en) (2.7s)
+
+  8 passed (19.8s)

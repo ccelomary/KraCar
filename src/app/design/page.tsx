@@ -1,3 +1,4 @@
+import Dropdown from "@/components/dropdown";
 import { getTranslator } from "@/i18n/server";
 import { notFound } from "next/navigation";
 import { Brand, Badge, Empty } from "@/components/ui";
@@ -55,13 +56,10 @@ export default async function Design() {
             {t("Name")}
             <input placeholder={t("Your full name")} />
           </label>
-          <label>
-            {t("Destination")}
-            <select>
-              <option value="Marrakech">{t("Marrakech")}</option>
-              <option value="Agadir">{t("Agadir")}</option>
-            </select>
-          </label>
+          <Dropdown label={<>{t("Destination")}</>}>
+            <option value="Marrakech">{t("Marrakech")}</option>
+            <option value="Agadir">{t("Agadir")}</option>
+          </Dropdown>
           <label className="span-two">
             {t("Your message")}
             <textarea

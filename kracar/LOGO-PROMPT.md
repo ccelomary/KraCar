@@ -1,0 +1,7 @@
+# KraCar logo v1
+
+Generated using the built-in image generation tool. Transparent PNG, intended for light backgrounds. Saved separately for review before replacing the current website identity.
+
+## Final generation prompt
+
+Use case: logo-brand. Create a finished original logo for KraCar, a Moroccan car rental and travel marketplace. Exact wordmark text: "KraCar" (capital K and C, remaining letters lowercase). Single horizontal logo lockup on a genuinely transparent background, generously framed, with a compact distinctive symbol to the left and an expertly kerned wordmark to the right. Brand palette: deep charcoal green #202624 as main color and fresh muted lime #D1EF83 as a small accent. Art direction: contemporary independent mobility brand, confident, warm, premium yet approachable, bespoke bold humanist sans lettering with subtle rounded details, extremely legible at small website header sizes. Symbol: elegantly reduced geometric K suggesting a winding road through its negative space, with one subtle lime route accent; coherent solid silhouette, balanced proportions. Flat crisp vector-like artwork, disciplined geometry, two colors only. Make it feel designed by a thoughtful identity studio, restrained and distinctive. Avoid generic front-view car icons, clip art, gradients, 3D, shadows, metallic surfaces, decorative Moroccan motifs, map pins, sparkles, AI symbols, taglines, mockups, stationery, brand boards, extra text or multiple logo options. Produce only one polished horizontal KraCar logo, very clean contours.

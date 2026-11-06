@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:28964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\booking-journey.spec.ts:480:5 › custom calendar supports keyboard dates, 24-hour time, apply and cancel (5.6s)
+  ok 2 e2e\booking-journey.spec.ts:525:7 › custom calendar fits mobile and is accessible in fr (3.5s)
+  ok 3 e2e\booking-journey.spec.ts:525:7 › custom calendar fits mobile and is accessible in ar (3.6s)
+
+  3 passed (14.1s)

@@ -1,13 +1,16 @@
 "use client";
+import { useSiteDate } from "./site-date";
+import SelectField from "./select-field";
 import { useTranslations } from "@/i18n/provider";
 import { useState, useId } from "react";
 import { handleTabKeys } from "./accessibility";
 import { useRouter } from "next/navigation";
 import { CarFront, Compass, Search } from "lucide-react";
-import { categories, cities, today } from "@/lib/catalog";
+import { categories, cities } from "@/lib/catalog";
 const icons = { cars: CarFront, activities: Compass };
 export default function SearchForm() {
   const t = useTranslations();
+  const today = useSiteDate();
   const [category, setCategory] = useState("cars");
   const [city, setCity] = useState("");
   const [returnCity, setReturnCity] = useState("");
@@ -56,42 +59,31 @@ export default function SearchForm() {
             );
           }}
         >
-          <label>
-            {t("Where are you headed?")}
-            <select
-              aria-label={t("Destination")}
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            >
-              <option value="">{t("Anywhere in Morocco")}</option>
-              {cities.map((c) => (
-                <option key={c} value={c}>
-                  {t(c)}
-                </option>
-              ))}
-            </select>
-          </label>
+          <SelectField
+            label={t("Where are you headed?")}
+            value={city}
+            onChange={setCity}
+            options={[
+              { value: "", label: t("Anywhere in Morocco") },
+              ...cities.map((city) => ({ value: city, label: t(city) })),
+            ]}
+          />
           {category === "cars" && (
-            <label>
-              {t("Drop-off location")}
-              <select
-                value={returnCity}
-                onChange={(e) => setReturnCity(e.target.value)}
-              >
-                <option value="">{t("Return to pickup city")}</option>
-                {cities.map((c) => (
-                  <option key={c} value={c}>
-                    {t(c)}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <SelectField
+              label={t("Drop-off location")}
+              value={returnCity}
+              onChange={setReturnCity}
+              options={[
+                { value: "", label: t("Return to pickup city") },
+                ...cities.map((city) => ({ value: city, label: t(city) })),
+              ]}
+            />
           )}
           <label>
             {category === "cars" ? t("Pickup date") : t("Experience date")}
             <input
               type="date"
-              min={today()}
+              min={today}
               value={start}
               onChange={(e) => {
                 setStart(e.target.value);
@@ -104,7 +96,7 @@ export default function SearchForm() {
               {category === "cars" ? t("Return date") : t("Until")}
               <input
                 type="date"
-                min={start || today()}
+                min={start || today}
                 disabled={!start}
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}

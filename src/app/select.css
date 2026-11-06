@@ -1,0 +1,191 @@
+.kc-select-field {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+.kc-select-label {
+  color: #53604c;
+  font-size: 13px;
+  font-weight: 500;
+}
+.kc-select-field .kc-select-trigger {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border: 1px solid #dce2d6;
+  border-radius: 12px;
+  background: #fff;
+  color: #263222;
+  font: inherit;
+  font-size: 14px;
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+  box-shadow: none;
+}
+.kc-select-trigger > span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.kc-select-trigger > svg {
+  flex-shrink: 0;
+  color: #65725d;
+}
+.kc-select-field .kc-select-trigger:hover {
+  border-color: #9ba98b;
+  background: #fafbf7;
+}
+.kc-select-field .kc-select-trigger:focus-visible {
+  outline: 2px solid #879d68;
+  outline-offset: 3px;
+}
+.kc-select-field .kc-select-trigger[aria-expanded="true"] {
+  border-color: #879d68;
+  background: #f7f9f2;
+}
+.kc-select-trigger[aria-expanded="true"] > svg:last-child {
+  transform: rotate(180deg);
+}
+.kc-select-field .kc-select-trigger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.kc-select-field .kc-select-trigger[aria-busy="true"] {
+  cursor: wait;
+}
+.kc-select-compact {
+  display: block;
+}
+.kc-select-compact .kc-select-trigger {
+  min-height: 40px;
+  width: auto;
+  padding: 8px 16px;
+  border-color: transparent;
+  border-radius: 24px;
+  font-size: 13px;
+  gap: 9px;
+  background: transparent;
+}
+.kc-select-menu {
+  position: fixed;
+  z-index: 10000;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6px;
+  border: 1px solid #dfe5d8;
+  border-radius: 16px;
+  background: #fff;
+  color: #263222;
+  box-shadow:
+    0 12px 38px #2632221c,
+    0 2px 6px #26322208;
+  font-family: var(--font-sans, inherit);
+  font-size: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: #c4ceba transparent;
+}
+.kc-select-menu[dir="rtl"] {
+  font-family: KraArabicSans, var(--font-sans);
+}
+@media (max-width: 1000px) {
+  .market-search .kc-search > .kc-select-field:first-child {
+    grid-column: 1/-1;
+  }
+  .market-search .market-activity-search > .kc-select-field:first-child {
+    grid-column: auto;
+  }
+}
+.kc-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 44px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+.kc-select-option[data-active="true"] {
+  background: #f1f4eb;
+}
+.kc-select-option[aria-selected="true"] {
+  background: #eaf2db;
+  font-weight: 600;
+  color: #344927;
+}
+.kc-select-option svg {
+  flex-shrink: 0;
+}
+.kc-select-option[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: default;
+}
+.kc-dropdown {
+  min-width: 0;
+}
+.kc-dropdown select.kc-select-native {
+  display: none !important;
+}
+.kc-select-field .kc-select-trigger[aria-invalid="true"] {
+  border-color: #af4438;
+}
+.kc-dropdown > .error-note {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+}
+.kc-calendar-time-inputs .kc-dropdown {
+  width: 68px;
+}
+.kc-calendar-time-inputs .kc-select-trigger {
+  min-height: 36px;
+  padding: 5px 12px;
+  gap: 6px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+.kc-calendar-time-inputs .kc-select-trigger > svg {
+  width: 14px;
+}
+.kc-select-field.period-select {
+  min-width: 150px;
+}
+.market-search .kc-search > .kc-select-field {
+  padding: 4px 12px 4px 0;
+  gap: 4px;
+}
+.market-search .kc-search > .kc-select-field > .kc-select-label {
+  font-size: 11px;
+}
+.market-search .kc-search > .kc-select-field > .kc-select-trigger {
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 0;
+  padding-inline-end: 18px;
+  min-height: 38px;
+  background: transparent;
+}
+.kc-filters .kc-select-field {
+  margin-bottom: 16px;
+}
+@media (max-width: 640px) {
+  .kc-select-compact .kc-select-trigger {
+    font-size: 12px;
+    padding: 8px 16px;
+    gap: 6px;
+  }
+  .kc-select-compact .kc-select-trigger > svg:first-child {
+    display: none;
+  }
+}

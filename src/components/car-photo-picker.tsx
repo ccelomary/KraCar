@@ -9,18 +9,24 @@ import {
   type CarPhoto,
 } from "@/lib/car-photos";
 
-export default function CarPhotoPicker({
+export type EditableCarPhoto = Pick<CarPhoto, "id" | "src" | "description">;
+
+export default function CarPhotoPicker<
+  Photo extends EditableCarPhoto = CarPhoto,
+>({
   photos,
   onChange,
   agencyId,
   disabled,
   onBusyChange,
+  uploadPhoto,
 }: {
-  photos: CarPhoto[];
-  onChange: (photos: CarPhoto[]) => void;
+  photos: Photo[];
+  onChange: (photos: Photo[]) => void;
   agencyId: string;
   disabled: boolean;
   onBusyChange: (busy: boolean) => void;
+  uploadPhoto?: (file: File) => Promise<Photo>;
 }) {
   const t = useTranslations(),
     id = useId(),
@@ -48,6 +54,11 @@ export default function CarPhotoPicker({
     const next = [...photos];
     try {
       for (const file of files) {
+        if (uploadPhoto) {
+          next.push(await uploadPhoto(file));
+          onChange([...next]);
+          continue;
+        }
         const form = new FormData();
         form.set("photo", file);
         form.set("agencyId", agencyId);
@@ -89,7 +100,11 @@ export default function CarPhotoPicker({
           type="file"
           accept="image/jpeg,image/png,image/webp"
           multiple
-          disabled={locked || photos.length >= maxCarPhotos || !agencyId}
+          disabled={
+            locked ||
+            photos.length >= maxCarPhotos ||
+            (!agencyId && !uploadPhoto)
+          }
           aria-describedby={`${id}-help`}
           onChange={(e) => {
             const files = Array.from(e.currentTarget.files || []);

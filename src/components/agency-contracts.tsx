@@ -1,4 +1,5 @@
 "use client";
+import Dropdown from "./dropdown";
 import { useState, type InputHTMLAttributes } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -182,20 +183,18 @@ export default function AgencyContracts({
                 placeholder={t("Customer, vehicle, plate or contract number")}
               />
             </label>
-            <label>
-              {t("Status")}
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="all">{t("All records")}</option>
-                {["draft", "issued", "returned", "void"].map((s) => (
-                  <option key={s} value={s}>
-                    {t(s.replace(/^./, (c) => c.toUpperCase()))}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <Dropdown
+              label={<>{t("Status")}</>}
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="all">{t("All records")}</option>
+              {["draft", "issued", "returned", "void"].map((s) => (
+                <option key={s} value={s}>
+                  {t(s.replace(/^./, (c) => c.toUpperCase()))}
+                </option>
+              ))}
+            </Dropdown>
             <p className="sr-only" role="status" aria-live="polite">
               {t("{0} records shown", { "0": visible.length })}
             </p>
@@ -399,16 +398,17 @@ function FuelField({
 }) {
   const t = useTranslations();
   return (
-    <label>
-      {t(label)}
-      <select value={value} onChange={(e) => onChange(e.target.value)}>
-        {fuelLevels.map((f) => (
-          <option key={f} value={f}>
-            {t(fuelLabels[f])}
-          </option>
-        ))}
-      </select>
-    </label>
+    <Dropdown
+      label={<>{t(label)}</>}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      {fuelLevels.map((f) => (
+        <option key={f} value={f}>
+          {t(fuelLabels[f])}
+        </option>
+      ))}
+    </Dropdown>
   );
 }
 
@@ -486,105 +486,99 @@ function ContractForm({
         });
       }}
     >
-      <label>
-        {t("Reservation (optional)")}
-        <select
-          value={form.bookingId}
-          onChange={(e) => {
-            const b = workspace.bookings.find((b) => b.id === e.target.value);
-            if (!b) {
-              update("bookingId", "");
-              return;
-            }
-            const customer = management.contacts.find(
-                (c) =>
-                  c.status === "active" &&
-                  c.email &&
-                  c.email.toLowerCase() === b.email.toLowerCase(),
-              ),
-              cars = management.vehicles.filter(
-                (v) => v.listingId === b.listingId,
-              ),
-              listing = workspace.listings.find((l) => l.id === b.listingId);
-            setForm({
-              ...form,
-              bookingId: b.id,
-              contactId: customer?.id || "",
-              vehicleId: cars.length === 1 ? cars[0].id : "",
-              invoiceId: "",
-              driverName: b.name,
-              start: b.start,
-              end: b.end,
-              pickupLocation: b.pickup,
-              returnLocation: b.returnCity || b.city,
-              currency: "EUR",
-              dailyRate: listing
-                ? (listing.price / 100).toFixed(2)
-                : form.dailyRate,
-              deposit: (b.deposit / 100).toFixed(2),
-              mileageOut: cars.length === 1 ? cars[0].mileage : 0,
-            });
-          }}
-        >
-          <option value="">{t("Standalone contract")}</option>
-          {workspace.bookings
-            .filter((b) => b.category === "cars")
-            .map((b) => (
-              <option key={b.id} value={b.id}>
-                {b.id} · {b.name}
-              </option>
-            ))}
-        </select>
-      </label>
-      <label>
-        {t("Customer")}
-        <select
-          required
-          value={form.contactId}
-          onChange={(e) => {
-            const customer = management.contacts.find(
-              (c) => c.id === e.target.value,
-            );
-            setForm({
-              ...form,
-              contactId: e.target.value,
-              driverName: customer?.name || form.driverName,
-              invoiceId: "",
-            });
-          }}
-        >
-          <option value="">{t("Choose a contact")}</option>
-          {management.contacts
-            .filter((c) => c.status === "active")
-            .map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-        </select>
-      </label>
-      <label>
-        {t("Vehicle")}
-        <select
-          required
-          value={form.vehicleId}
-          onChange={(e) => {
-            const v = management.vehicles.find((v) => v.id === e.target.value);
-            setForm({
-              ...form,
-              vehicleId: e.target.value,
-              mileageOut: v?.mileage || 0,
-            });
-          }}
-        >
-          <option value="">{t("Choose a vehicle")}</option>
-          {management.vehicles.map((v) => (
-            <option key={v.id} value={v.id}>
-              {v.plate} · {v.name}
+      <Dropdown
+        label={<>{t("Reservation (optional)")}</>}
+        value={form.bookingId}
+        onChange={(e) => {
+          const b = workspace.bookings.find((b) => b.id === e.target.value);
+          if (!b) {
+            update("bookingId", "");
+            return;
+          }
+          const customer = management.contacts.find(
+              (c) =>
+                c.status === "active" &&
+                c.email &&
+                c.email.toLowerCase() === b.email.toLowerCase(),
+            ),
+            cars = management.vehicles.filter(
+              (v) => v.listingId === b.listingId,
+            ),
+            listing = workspace.listings.find((l) => l.id === b.listingId);
+          setForm({
+            ...form,
+            bookingId: b.id,
+            contactId: customer?.id || "",
+            vehicleId: cars.length === 1 ? cars[0].id : "",
+            invoiceId: "",
+            driverName: b.name,
+            start: b.start,
+            end: b.end,
+            pickupLocation: b.pickup,
+            returnLocation: b.returnCity || b.city,
+            currency: "EUR",
+            dailyRate: listing
+              ? (listing.price / 100).toFixed(2)
+              : form.dailyRate,
+            deposit: (b.deposit / 100).toFixed(2),
+            mileageOut: cars.length === 1 ? cars[0].mileage : 0,
+          });
+        }}
+      >
+        <option value="">{t("Standalone contract")}</option>
+        {workspace.bookings
+          .filter((b) => b.category === "cars")
+          .map((b) => (
+            <option key={b.id} value={b.id}>
+              {b.id} · {b.name}
             </option>
           ))}
-        </select>
-      </label>
+      </Dropdown>
+      <Dropdown
+        label={<>{t("Customer")}</>}
+        required
+        value={form.contactId}
+        onChange={(e) => {
+          const customer = management.contacts.find(
+            (c) => c.id === e.target.value,
+          );
+          setForm({
+            ...form,
+            contactId: e.target.value,
+            driverName: customer?.name || form.driverName,
+            invoiceId: "",
+          });
+        }}
+      >
+        <option value="">{t("Choose a contact")}</option>
+        {management.contacts
+          .filter((c) => c.status === "active")
+          .map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+      </Dropdown>
+      <Dropdown
+        label={<>{t("Vehicle")}</>}
+        required
+        value={form.vehicleId}
+        onChange={(e) => {
+          const v = management.vehicles.find((v) => v.id === e.target.value);
+          setForm({
+            ...form,
+            vehicleId: e.target.value,
+            mileageOut: v?.mileage || 0,
+          });
+        }}
+      >
+        <option value="">{t("Choose a vehicle")}</option>
+        {management.vehicles.map((v) => (
+          <option key={v.id} value={v.id}>
+            {v.plate} · {v.name}
+          </option>
+        ))}
+      </Dropdown>
       {(!management.contacts.some((c) => c.status === "active") ||
         !management.vehicles.length) && (
         <p className="notice">
@@ -665,22 +659,20 @@ function ContractForm({
         value={form.returnLocation}
         onChange={(e) => update("returnLocation", e.target.value)}
       />
-      <label>
-        {t("Currency")}
-        <select
-          value={form.currency}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              currency: e.target.value as RentalContract["currency"],
-              invoiceId: "",
-            })
-          }
-        >
-          <option value="EUR">EUR</option>
-          <option value="MAD">MAD</option>
-        </select>
-      </label>
+      <Dropdown
+        label={<>{t("Currency")}</>}
+        value={form.currency}
+        onChange={(e) =>
+          setForm({
+            ...form,
+            currency: e.target.value as RentalContract["currency"],
+            invoiceId: "",
+          })
+        }
+      >
+        <option value="EUR">EUR</option>
+        <option value="MAD">MAD</option>
+      </Dropdown>
       <div className="field-grid">
         <Field
           label="Daily rental rate"
@@ -708,28 +700,26 @@ function ContractForm({
           {t("Rental total")}: {total}
         </strong>
       </p>
-      <label>
-        {t("Linked invoice (optional)")}
-        <select
-          value={form.invoiceId}
-          onChange={(e) => update("invoiceId", e.target.value)}
-        >
-          <option value="">{t("Not linked")}</option>
-          {management.invoices
-            .filter(
-              (i) =>
-                i.contactId === form.contactId &&
-                i.currency === form.currency &&
-                i.status !== "void",
-            )
-            .map((i) => (
-              <option key={i.id} value={i.id}>
-                {i.number || t("Draft invoice")} ·{" "}
-                {money(i.total, i.currency, t.locale)}
-              </option>
-            ))}
-        </select>
-      </label>
+      <Dropdown
+        label={<>{t("Linked invoice (optional)")}</>}
+        value={form.invoiceId}
+        onChange={(e) => update("invoiceId", e.target.value)}
+      >
+        <option value="">{t("Not linked")}</option>
+        {management.invoices
+          .filter(
+            (i) =>
+              i.contactId === form.contactId &&
+              i.currency === form.currency &&
+              i.status !== "void",
+          )
+          .map((i) => (
+            <option key={i.id} value={i.id}>
+              {i.number || t("Draft invoice")} ·{" "}
+              {money(i.total, i.currency, t.locale)}
+            </option>
+          ))}
+      </Dropdown>
       <div className="field-grid">
         <Field
           label="Pickup mileage (km)"
@@ -838,16 +828,17 @@ function ReturnForm({
         max={5000000}
         defaultValue={c.mileageOut}
       />
-      <label>
-        {t("Fuel at return")}
-        <select name="fuel" defaultValue={c.fuelOut}>
-          {fuelLevels.map((f) => (
-            <option key={f} value={f}>
-              {t(fuelLabels[f])}
-            </option>
-          ))}
-        </select>
-      </label>
+      <Dropdown
+        label={<>{t("Fuel at return")}</>}
+        name="fuel"
+        defaultValue={c.fuelOut}
+      >
+        {fuelLevels.map((f) => (
+          <option key={f} value={f}>
+            {t(fuelLabels[f])}
+          </option>
+        ))}
+      </Dropdown>
       <label>
         {t("Vehicle condition at return")}
         <textarea name="condition" required minLength={3} maxLength={3000} />

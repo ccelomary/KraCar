@@ -81,9 +81,8 @@ test("localized partner links preserve the host and in-progress application", as
   await page.goto("/ar/list-your-property");
   await expect(page).toHaveURL("http://127.0.0.1:3000/partners");
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
-  await page
-    .getByRole("combobox", { name: "اللغة", exact: true })
-    .selectOption("en");
+  await page.getByRole("combobox", { name: /^اللغة / }).click();
+  await page.getByRole("option", { name: "English", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await page
     .getByLabel("Business name", { exact: true })
@@ -95,9 +94,8 @@ test("localized partner links preserve the host and in-progress application", as
       mimeType: "application/pdf",
       buffer: Buffer.from("<html>Not a real registration document</html>"),
     });
-  await page
-    .getByRole("combobox", { name: "Language", exact: true })
-    .selectOption("fr");
+  await page.getByRole("combobox", { name: /^Language / }).click();
+  await page.getByRole("option", { name: "Français", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "fr");
   await expect(page.locator('input[name="name"]')).toHaveValue(
     "In-progress business",
@@ -139,12 +137,10 @@ test("travel guides, FAQs and a drop-off city connect to the reservation journey
   ).toBeVisible();
   await scan(page);
   await page.goto("/");
-  await page
-    .getByRole("combobox", { name: "Destination", exact: true })
-    .selectOption("Marrakech");
-  await page
-    .getByRole("combobox", { name: /Drop-off location/ })
-    .selectOption("Agadir");
+  await page.getByRole("combobox", { name: /^Where are you headed/ }).click();
+  await page.getByRole("option", { name: "Marrakech", exact: true }).click();
+  await page.getByRole("combobox", { name: /Drop-off location/ }).click();
+  await page.getByRole("option", { name: "Agadir", exact: true }).click();
   await page.getByRole("button", { name: "Find my journey" }).click();
   await expect(page).toHaveURL(/\/explore\?/);
   await expect(
@@ -152,7 +148,7 @@ test("travel guides, FAQs and a drop-off city connect to the reservation journey
   ).toHaveAttribute("href", /returnCity=Agadir/);
   await page.getByRole("link", { name: /Dacia Duster/ }).click();
   await expect(
-    page.getByRole("combobox", { name: "Return city", exact: true }),
-  ).toHaveValue("Agadir");
+    page.getByRole("combobox", { name: "Return city", exact: false }),
+  ).toHaveAttribute("data-value", "Agadir");
   await scan(page);
 });

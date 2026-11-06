@@ -1,4 +1,5 @@
 "use client";
+import SelectField from "./select-field";
 import { useTranslations } from "@/i18n/provider";
 import { matchesSearch } from "@/i18n/search";
 import { useState, useMemo } from "react";
@@ -129,21 +130,15 @@ export default function Catalog() {
               </button>
             </div>
             <div className="filter-group">
-              <label>
-                {t("Destination")}
-                <select
-                  aria-label={t("Destination")}
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                >
-                  <option value="">{t("All destinations")}</option>
-                  {cities.map((c) => (
-                    <option key={c} value={c}>
-                      {t(c)}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <SelectField
+                label={t("Destination")}
+                value={city}
+                onChange={setCity}
+                options={[
+                  { value: "", label: t("All destinations") },
+                  ...cities.map((city) => ({ value: city, label: t(city) })),
+                ]}
+              />
             </div>
             <div className="filter-group">
               <label>
@@ -218,18 +213,17 @@ export default function Catalog() {
                 {t(" ")}
                 {city && t("in {0}", { "0": t(city) })}
               </span>
-              <label className="sr-only" htmlFor="catalog-sort">
-                {t("Sort listings")}
-              </label>
-              <select
-                id="catalog-sort"
+              <SelectField
+                label={t("Sort listings")}
+                compact
                 value={sort}
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="recommended">{t("Recommended")}</option>
-                <option value="low">{t("Price: low to high")}</option>
-                <option value="high">{t("Price: high to low")}</option>
-              </select>
+                onChange={setSort}
+                options={[
+                  { value: "recommended", label: t("Recommended") },
+                  { value: "low", label: t("Price: low to high") },
+                  { value: "high", label: t("Price: high to low") },
+                ]}
+              />
             </div>
             <div className="table-search" style={{ marginBottom: "1rem" }}>
               <Search aria-hidden="true" focusable="false" size={16} />

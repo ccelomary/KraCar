@@ -1,4 +1,4 @@
-import { MongoMemoryServer } from "mongodb-memory-server";
+import { MongoMemoryReplSet } from "mongodb-memory-server";
 import { mkdir } from "node:fs/promises";
 import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
@@ -8,12 +8,14 @@ loadEnvConfig(process.cwd());
 let mongo;
 if (!process.env.MONGODB_URI) {
   await mkdir(".data/mongo", { recursive: true });
-  mongo = await MongoMemoryServer.create({
-    instance: {
-      dbPath: ".data/mongo",
-      storageEngine: "wiredTiger",
-      dbName: "atlas_journeys",
-    },
+  mongo = await MongoMemoryReplSet.create({
+    replSet: { count: 1, storageEngine: "wiredTiger" },
+    instanceOpts: [
+      {
+        dbPath: ".data/mongo",
+        storageEngine: "wiredTiger",
+      },
+    ],
   });
   process.env.MONGODB_URI = mongo.getUri();
   process.env.DEMO_MODE = "true";
@@ -22,6 +24,29 @@ if (!process.env.MONGODB_URI) {
   );
 }
 process.env.SESSION_SECRET ||= randomBytes(48).toString("hex");
+// Generate the client and initialize rental indexes before serving requests.
+for (const args of [
+  ["node_modules/prisma/build/index.js", "generate"],
+  ...(mongo
+    ? [["node_modules/tsx/dist/cli.mjs", "scripts/setup-kracar-db.ts"]]
+    : []),
+  ...(mongo
+    ? [["node_modules/tsx/dist/cli.mjs", "scripts/seed-kracar.ts"]]
+    : []),
+]) {
+  const setup = spawn(process.execPath, args, {
+    stdio: "inherit",
+    env: process.env,
+  });
+  const code = await new Promise((resolve, reject) => {
+    setup.on("error", reject);
+    setup.on("exit", resolve);
+  });
+  if (code !== 0) {
+    if (mongo) await mongo.stop();
+    process.exit(code || 1);
+  }
+}
 const child = spawn(
   process.execPath,
   [

@@ -1,4 +1,5 @@
 "use client";
+import Dropdown from "./dropdown";
 import { useState, useId } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -172,7 +173,7 @@ export default function AgencyManagement({
     );
   const title =
     section === "contacts"
-      ? "Contacts"
+      ? "Clients"
       : section === "vehicles"
         ? "Fleet overview"
         : "Invoices";
@@ -233,7 +234,7 @@ export default function AgencyManagement({
           <Plus aria-hidden="true" focusable="false" size={16} />
           {t(
             section === "contacts"
-              ? "New contact"
+              ? "New client"
               : section === "vehicles"
                 ? "Add vehicle"
                 : "New invoice",
@@ -289,37 +290,23 @@ export default function AgencyManagement({
             placeholder={t("Search by name or reference")}
           />
         </label>
-        <label>
-          {t("Status")}
-          <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="all">{t("All records")}</option>
-            {(section === "contacts"
-              ? ["active", "archived"]
-              : section === "vehicles"
-                ? [
-                    "available",
-                    "rented",
-                    "maintenance",
-                    "inactive",
-                    "attention",
-                  ]
-                : [
-                    "draft",
-                    "issued",
-                    "partially_paid",
-                    "paid",
-                    "overdue",
-                    "void",
-                  ]
-            ).map((s) => (
-              <option key={s} value={s}>
-                {t(
-                  s.replaceAll("_", " ").replace(/^./, (c) => c.toUpperCase()),
-                )}
-              </option>
-            ))}
-          </select>
-        </label>
+        <Dropdown
+          label={<>{t("Status")}</>}
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        >
+          <option value="all">{t("All records")}</option>
+          {(section === "contacts"
+            ? ["active", "archived"]
+            : section === "vehicles"
+              ? ["available", "rented", "maintenance", "inactive", "attention"]
+              : ["draft", "issued", "partially_paid", "paid", "overdue", "void"]
+          ).map((s) => (
+            <option key={s} value={s}>
+              {t(s.replaceAll("_", " ").replace(/^./, (c) => c.toUpperCase()))}
+            </option>
+          ))}
+        </Dropdown>
       </div>
       {section === "contacts" ? (
         <div className="management-grid">
@@ -494,7 +481,7 @@ export default function AgencyManagement({
       )}
       {contact && (
         <Modal
-          title={contact === "new" ? "New contact" : "Edit contact"}
+          title={contact === "new" ? "New client" : "Edit client"}
           onClose={() => !busy && setContact(null)}
         >
           <ContactForm
@@ -536,7 +523,7 @@ export default function AgencyManagement({
         </Modal>
       )}
       {viewContact && (
-        <Modal title="Contact history" onClose={() => setViewContact(null)}>
+        <Modal title="Client history" onClose={() => setViewContact(null)}>
           <h3>{viewContact.name}</h3>
           <p>
             {viewContact.company}
@@ -718,6 +705,10 @@ function ContactForm({
   const t = useTranslations();
   const [id] = useState(() => contact?.id || crypto.randomUUID());
   const [form, setForm] = useState({
+    clientType: contact?.clientType || "individual",
+    country: contact?.country || "",
+    ICE: contact?.ICE || "",
+    billingName: contact?.billingName || "",
     name: contact?.name || "",
     email: contact?.email || "",
     phone: contact?.phone || "",
@@ -740,30 +731,67 @@ function ContactForm({
         });
       }}
     >
-      {!contact && (
+      <Dropdown
+        label={<>{t("Client type")}</>}
+        value={form.clientType}
+        onChange={(e) =>
+          setForm({
+            ...form,
+            clientType: e.target.value as "individual" | "company",
+          })
+        }
+      >
+        <option value="individual">{t("Individual")}</option>
+        <option value="company">{t("Company")}</option>
+      </Dropdown>
+      <div className="field-grid">
         <label>
-          {t("Prefill from reservation")}
-          <select
-            defaultValue=""
-            onChange={(e) => {
-              const b = workspace.bookings.find((b) => b.id === e.target.value);
-              if (b)
-                setForm({
-                  ...form,
-                  name: b.name,
-                  email: b.email,
-                  phone: b.phone,
-                });
-            }}
-          >
-            <option value="">{t("Enter details manually")}</option>
-            {workspace.bookings.map((b) => (
-              <option key={b.id} value={b.id}>
-                {b.id} · {b.name}
-              </option>
-            ))}
-          </select>
+          {t("Country")}
+          <input
+            value={form.country}
+            maxLength={100}
+            onChange={(e) => setForm({ ...form, country: e.target.value })}
+          />
         </label>
+        <label>
+          {t("Client ICE (if applicable)")}
+          <input
+            value={form.ICE}
+            maxLength={30}
+            onChange={(e) => setForm({ ...form, ICE: e.target.value })}
+          />
+        </label>
+      </div>
+      <label>
+        {t("Invoice recipient")}
+        <input
+          value={form.billingName}
+          maxLength={160}
+          onChange={(e) => setForm({ ...form, billingName: e.target.value })}
+        />
+      </label>
+      {!contact && (
+        <Dropdown
+          label={<>{t("Prefill from reservation")}</>}
+          defaultValue=""
+          onChange={(e) => {
+            const b = workspace.bookings.find((b) => b.id === e.target.value);
+            if (b)
+              setForm({
+                ...form,
+                name: b.name,
+                email: b.email,
+                phone: b.phone,
+              });
+          }}
+        >
+          <option value="">{t("Enter details manually")}</option>
+          {workspace.bookings.map((b) => (
+            <option key={b.id} value={b.id}>
+              {b.id} · {b.name}
+            </option>
+          ))}
+        </Dropdown>
       )}
       <label>
         {t("Full name")}
@@ -824,18 +852,16 @@ function ContactForm({
           onChange={(e) => setForm({ ...form, notes: e.target.value })}
         />
       </label>
-      <label>
-        {t("Status")}
-        <select
-          value={form.status}
-          onChange={(e) =>
-            setForm({ ...form, status: e.target.value as Contact["status"] })
-          }
-        >
-          <option value="active">{t("Active")}</option>
-          <option value="archived">{t("Archived")}</option>
-        </select>
-      </label>
+      <Dropdown
+        label={<>{t("Status")}</>}
+        value={form.status}
+        onChange={(e) =>
+          setForm({ ...form, status: e.target.value as Contact["status"] })
+        }
+      >
+        <option value="active">{t("Active")}</option>
+        <option value="archived">{t("Archived")}</option>
+      </Dropdown>
       <FormEnd busy={busy} error={error} />
     </form>
   );
@@ -955,37 +981,33 @@ function VehicleForm({
           />
         </label>
       </div>
-      <label>
-        {t("Linked listing")}
-        <select
-          value={form.listingId}
-          onChange={(e) => setForm({ ...form, listingId: e.target.value })}
-        >
-          <option value="">{t("Not linked")}</option>
-          {workspace.listings
-            .filter((l) => l.category === "cars")
-            .map((l) => (
-              <option key={l.id} value={l.id}>
-                {l.name}
-              </option>
-            ))}
-        </select>
-      </label>
-      <label>
-        {t("Operating status")}
-        <select
-          value={form.status}
-          onChange={(e) =>
-            setForm({ ...form, status: e.target.value as Vehicle["status"] })
-          }
-        >
-          {["available", "rented", "maintenance", "inactive"].map((s) => (
-            <option key={s} value={s}>
-              {t(s.replace(/^./, (c) => c.toUpperCase()))}
+      <Dropdown
+        label={<>{t("Linked listing")}</>}
+        value={form.listingId}
+        onChange={(e) => setForm({ ...form, listingId: e.target.value })}
+      >
+        <option value="">{t("Not linked")}</option>
+        {workspace.listings
+          .filter((l) => l.category === "cars")
+          .map((l) => (
+            <option key={l.id} value={l.id}>
+              {l.name}
             </option>
           ))}
-        </select>
-      </label>
+      </Dropdown>
+      <Dropdown
+        label={<>{t("Operating status")}</>}
+        value={form.status}
+        onChange={(e) =>
+          setForm({ ...form, status: e.target.value as Vehicle["status"] })
+        }
+      >
+        {["available", "rented", "maintenance", "inactive"].map((s) => (
+          <option key={s} value={s}>
+            {t(s.replace(/^./, (c) => c.toUpperCase()))}
+          </option>
+        ))}
+      </Dropdown>
       <div className="field-grid">
         <label>
           {t("Insurance renewal")}
@@ -1097,60 +1119,56 @@ function InvoiceForm({
         });
       }}
     >
-      <label>
-        {t("Customer")}
-        <select
-          required
-          value={form.contactId}
-          onChange={(e) => setForm({ ...form, contactId: e.target.value })}
-        >
-          <option value="">{t("Choose a contact")}</option>
-          {contacts
-            .filter((c) => c.status === "active")
-            .map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-                {c.company ? ` · ${c.company}` : ""}
-              </option>
-            ))}
-        </select>
-      </label>
+      <Dropdown
+        label={<>{t("Customer")}</>}
+        required
+        value={form.contactId}
+        onChange={(e) => setForm({ ...form, contactId: e.target.value })}
+      >
+        <option value="">{t("Choose a contact")}</option>
+        {contacts
+          .filter((c) => c.status === "active")
+          .map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+              {c.company ? ` · ${c.company}` : ""}
+            </option>
+          ))}
+      </Dropdown>
       {!contacts.some((c) => c.status === "active") && (
         <p className="notice">
           {t("Create an active contact before creating an invoice.")}
         </p>
       )}
-      <label>
-        {t("Reservation (optional)")}
-        <select
-          value={form.bookingId}
-          onChange={(e) => {
-            const b = workspace.bookings.find((b) => b.id === e.target.value);
-            setForm({
-              ...form,
-              bookingId: e.target.value,
-              ...(b ? { currency: "EUR" as const } : {}),
-            });
-            if (b)
-              setItems([
-                {
-                  key: crypto.randomUUID(),
-                  description: `${b.listingName} · ${b.start} → ${b.end}`,
-                  quantity: 1,
-                  unitPrice: b.total,
-                  price: (b.total / 100).toFixed(2),
-                },
-              ]);
-          }}
-        >
-          <option value="">{t("Standalone invoice")}</option>
-          {workspace.bookings.map((b) => (
-            <option key={b.id} value={b.id}>
-              {b.id} · {b.name}
-            </option>
-          ))}
-        </select>
-      </label>
+      <Dropdown
+        label={<>{t("Reservation (optional)")}</>}
+        value={form.bookingId}
+        onChange={(e) => {
+          const b = workspace.bookings.find((b) => b.id === e.target.value);
+          setForm({
+            ...form,
+            bookingId: e.target.value,
+            ...(b ? { currency: "EUR" as const } : {}),
+          });
+          if (b)
+            setItems([
+              {
+                key: crypto.randomUUID(),
+                description: `${b.listingName} · ${b.start} → ${b.end}`,
+                quantity: 1,
+                unitPrice: b.total,
+                price: (b.total / 100).toFixed(2),
+              },
+            ]);
+        }}
+      >
+        <option value="">{t("Standalone invoice")}</option>
+        {workspace.bookings.map((b) => (
+          <option key={b.id} value={b.id}>
+            {b.id} · {b.name}
+          </option>
+        ))}
+      </Dropdown>
       <div className="field-grid">
         <label>
           {t("Invoice date")}
@@ -1172,22 +1190,20 @@ function InvoiceForm({
           />
         </label>
       </div>
-      <label>
-        {t("Currency")}
-        <select
-          aria-describedby={currencyHelpId}
-          value={form.currency}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              currency: e.target.value as Invoice["currency"],
-            })
-          }
-        >
-          <option value="EUR">EUR</option>
-          <option value="MAD">MAD</option>
-        </select>
-      </label>
+      <Dropdown
+        label={<>{t("Currency")}</>}
+        aria-describedby={currencyHelpId}
+        value={form.currency}
+        onChange={(e) =>
+          setForm({
+            ...form,
+            currency: e.target.value as Invoice["currency"],
+          })
+        }
+      >
+        <option value="EUR">EUR</option>
+        <option value="MAD">MAD</option>
+      </Dropdown>
       <small className="muted" id={currencyHelpId}>
         {t(
           "Amounts are entered in the selected currency. No currency conversion is applied.",

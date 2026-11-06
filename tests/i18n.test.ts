@@ -22,7 +22,7 @@ test("locale preference is allowlisted and takes priority over weighted browser 
   assert.equal(resolveLocale(undefined, "de-DE,ar-MA;q=0.8,fr;q=0.9"), "fr");
   assert.equal(resolveLocale("invalid", "ar-MA,fr;q=0.5"), "ar");
   assert.equal(resolveLocale(undefined, "fr;q=0,en;q=0.8"), "en");
-  assert.equal(resolveLocale(undefined, "de,es;q=0.9"), "en");
+  assert.equal(resolveLocale(undefined, "de,es;q=0.9"), "fr");
   assert.equal(isLocale("../../secret"), false);
 });
 test("French and Arabic dictionaries have matching non-empty keys and preserve placeholders", () => {

@@ -6,8 +6,18 @@ import { LifeBuoy, ShieldCheck, CalendarDays } from "lucide-react";
 export async function generateMetadata() {
   return localizeMetadata({ title: "A little help for your journey" });
 }
-export default async function Support() {
+export default async function Support({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const t = await getTranslator();
+  const query = await searchParams;
+  const reference =
+    typeof query.reference === "string" &&
+    /^[A-Za-z0-9-]{1,80}$/.test(query.reference)
+      ? query.reference
+      : "";
   return (
     <PublicShell>
       <main tabIndex={-1} id="main-content" className="public-container">
@@ -56,7 +66,7 @@ export default async function Support() {
               ))}
             </div>
           </section>
-          <SupportForm />
+          <SupportForm reference={reference} />
         </div>
         <section style={{ maxWidth: "50rem", margin: "0 auto 4rem" }}>
           <div className="section-head">
@@ -72,7 +82,7 @@ export default async function Support() {
             },
             {
               q: "Do I need an account to make a reservation?",
-              a: "No. Send a request as a guest, then save your private booking link to access your reservation and see its status.",
+              a: "For a car rental, sign in before sending your request so you can track the partner’s reply and your documents. For activities, follow the access instructions shown with your request.",
             },
             {
               q: "Can I change or cancel my request?",
@@ -80,7 +90,7 @@ export default async function Support() {
             },
             {
               q: "What currency are prices in?",
-              a: "All displayed prices are in euros. Car prices are per day and activities per person unless the listing says otherwise.",
+              a: "Car rental prices are shown in MAD. Always check the currency and pricing unit on your chosen offer. The request summary shows the full price, advance, service fee and remaining balance.",
             },
           ].map((f) => (
             <details className="faq" key={f.q}>

@@ -1,4 +1,5 @@
 "use client";
+import Dropdown from "./dropdown";
 import { useTranslations } from "@/i18n/provider";
 import Link from "next/link";
 import CarPhotoPicker from "./car-photo-picker";
@@ -864,39 +865,35 @@ export function ListingEditor({
         />
       </label>
       <div className="field-grid">
-        <label>
-          {t("Category")}
-          <select
-            value={form.category}
-            disabled={busy || uploading}
-            onChange={(e) => {
-              setForm({
-                ...form,
-                category: e.target.value as Listing["category"],
-              });
-              setPhotos([]);
-            }}
-          >
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {t(c.label)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          {t("City")}
-          <select
-            value={form.city}
-            onChange={(e) => setForm({ ...form, city: e.target.value })}
-          >
-            {cities.map((c) => (
-              <option key={c} value={c}>
-                {t(c)}
-              </option>
-            ))}
-          </select>
-        </label>
+        <Dropdown
+          label={<>{t("Category")}</>}
+          value={form.category}
+          disabled={busy || uploading}
+          onChange={(e) => {
+            setForm({
+              ...form,
+              category: e.target.value as Listing["category"],
+            });
+            setPhotos([]);
+          }}
+        >
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {t(c.label)}
+            </option>
+          ))}
+        </Dropdown>
+        <Dropdown
+          label={<>{t("City")}</>}
+          value={form.city}
+          onChange={(e) => setForm({ ...form, city: e.target.value })}
+        >
+          {cities.map((c) => (
+            <option key={c} value={c}>
+              {t(c)}
+            </option>
+          ))}
+        </Dropdown>
         <label>
           {t("Price in EUR")}
           <input
@@ -942,24 +939,22 @@ export function ListingEditor({
         </label>
       </div>
       {role === "platform" && (
-        <label>
-          {t("Provider agency")}
-          <select
-            required
-            value={form.agencyId}
-            disabled={busy || uploading}
-            onChange={(e) => {
-              setForm({ ...form, agencyId: e.target.value });
-              setPhotos([]);
-            }}
-          >
-            {agencies.map((a) => (
-              <option key={a.id} value={a.id}>
-                {a.name}
-              </option>
-            ))}
-          </select>
-        </label>
+        <Dropdown
+          label={<>{t("Provider agency")}</>}
+          required
+          value={form.agencyId}
+          disabled={busy || uploading}
+          onChange={(e) => {
+            setForm({ ...form, agencyId: e.target.value });
+            setPhotos([]);
+          }}
+        >
+          {agencies.map((a) => (
+            <option key={a.id} value={a.id}>
+              {a.name}
+            </option>
+          ))}
+        </Dropdown>
       )}
       {form.category === "cars" && (
         <CarPhotoPicker
@@ -982,21 +977,19 @@ export function ListingEditor({
           placeholder={t("What makes this listing a good fit for a traveler?")}
         />
       </label>
-      <label>
-        {t("Visibility")}
-        <select
-          aria-label={t("Visibility")}
-          value={form.status}
-          onChange={(e) =>
-            setForm({ ...form, status: e.target.value as Listing["status"] })
-          }
-        >
-          <option value="published">{t("Published")}</option>
-          <option value="archived">
-            {t("Archived \u00B7 hidden from travelers")}
-          </option>
-        </select>
-      </label>
+      <Dropdown
+        label={<>{t("Visibility")}</>}
+        aria-label={t("Visibility")}
+        value={form.status}
+        onChange={(e) =>
+          setForm({ ...form, status: e.target.value as Listing["status"] })
+        }
+      >
+        <option value="published">{t("Published")}</option>
+        <option value="archived">
+          {t("Archived \u00B7 hidden from travelers")}
+        </option>
+      </Dropdown>
       {form.category === "cars" && (
         <p className="notice">
           {t(
@@ -1080,16 +1073,17 @@ export function Settings({
                 onChange={(e) => setAgencyName(e.target.value)}
               />
             </label>
-            <label>
-              {t("Primary city")}
-              <select value={city} onChange={(e) => setCity(e.target.value)}>
-                {cities.map((c) => (
-                  <option key={c} value={c}>
-                    {t(c)}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <Dropdown
+              label={<>{t("Primary city")}</>}
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            >
+              {cities.map((c) => (
+                <option key={c} value={c}>
+                  {t(c)}
+                </option>
+              ))}
+            </Dropdown>
             <label>
               {t("Business billing address")}
               <textarea

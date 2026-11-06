@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open **http://127.0.0.1:3000**. Without `MONGODB_URI`, the development script starts a real local MongoDB process and stores its data in `.data/mongo`. The first run may download the MongoDB binary. Data survives a normal restart. No cloud account is needed.
+Open **http://127.0.0.1:3000**. Without `MONGODB_URI`, the development script starts a real local MongoDB replica set and stores its data in `.data/mongo`. The first run may download the MongoDB binary. Data survives a normal restart. No cloud account is needed.
 
 Visit `/login` and choose **Agency demo** or **Platform demo**. Sample access is restricted to development. The conventional sample credentials are `agency@atlas.local` or `admin@atlas.local`, password `AtlasDemo2026!`. All sample people, agencies, reservation activity, commercial conditions, and prices are fictional.
 
@@ -33,6 +33,7 @@ The development server binds to `127.0.0.1`. Demo workspaces are intended for th
 Create `.env.local` using `.env.example`. Set your own `MONGODB_URI`, database name, `SESSION_SECRET` (at least 32 random characters), `APP_ORIGIN` (the exact public HTTPS origin), `ADMIN_EMAIL`, and a unique `ADMIN_PASSWORD` (at least 12 characters). Use a separate database from the local sample preview. Set `DEMO_MODE=false`.
 
 ```powershell
+npm run db:push
 npm run seed
 npm run build
 npm start
@@ -110,3 +111,19 @@ Fleet overview → Add vehicle / Manage vehicle now accepts up to six JPEG, PNG 
 My listings → Add a listing / Edit listing offers the same controls for car rentals. Published listing photos appear on search cards and in the rental detail gallery. Archiving the listing removes public access to its uploaded photos unless another published listing references them. Linking a physical vehicle to a listing does not automatically publish its photos.
 
 Uploads are validated and re-encoded as bounded WebP images with source metadata removed, then stored in MongoDB. An uploaded photo can only be attached to its owning agency's records; unattached uploads expire after 24 hours. Controls and feedback support English, French and Arabic, keyboard navigation and mobile layouts. Run `npx playwright test e2e/car-photos.spec.ts` with `TEST_MONGODB_URI` pointing to the local test database for the self-cleaning upload/privacy/gallery workflow.
+
+## Rental core database
+
+The car catalogue, customer authentication, reservations, contracts, invoices and payments now use MongoDB through Prisma 6.19.3. PostgreSQL and its driver are no longer required. The original marketplace keeps its existing MongoDB collections unchanged.
+
+Set `MONGODB_URI` to a replica set or Atlas connection. The rental core uses the `kracar_core` database on that server by default; override with `KRACAR_MONGODB_DB`, or supply a separate `KRACAR_MONGODB_URI` including its database name. `DATABASE_URL` is no longer used. Do not point local demo seeds at a live database.
+
+Run `npm run db:push` once when configuring a database. It checks transaction support, applies the Prisma MongoDB schema and creates partial unique indexes for invoice numbers, invoice obligations and booking allocations. `npm run db:migrate` is an alias for this MongoDB setup. Prisma Migrate and the historical SQL files are not used. Client generation runs automatically during installation; `npm run db:generate` regenerates it explicitly.
+
+Without a configured server, `npm run dev` starts a persistent single-node replica set, initializes indexes and seeds fictional rental accounts. With an explicitly configured server, initialize it with `npm run db:push`; fictional rental seeding is restricted to local servers with `DEMO_MODE=true` via `npm run seed:kracar`.
+
+Rental commands and notification jobs use transactions with a shared MongoDB write lock and retry on write conflicts. Interval overlap checks run inside those transactions and allow adjacent bookings. Financial and immutable-document rules remain enforced by the rental service; direct database writes bypass these application rules. Use the application for business mutations and restrict database credentials accordingly.
+
+Run `npm run test:mongodb` for isolated replica-set integration tests covering customer auth, competing inventory writes, rollback, and nullable unique indexes. Run `npm run jobs:kracar -- --once` to process pending notifications once.
+
+This changes the persistence backend; existing PostgreSQL records are not automatically copied into MongoDB. Historical SQL specifications remain in `prisma/migrations` and `kracar/*.sql` for reference only.

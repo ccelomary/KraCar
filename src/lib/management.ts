@@ -4,6 +4,10 @@ import { carPhotosSchema } from "./car-photos";
 const text = (max: number) => z.string().trim().max(max);
 const date = z.union([z.iso.date(), z.literal("")]);
 export const contactSchema = z.object({
+  clientType: z.enum(["individual", "company"]).default("individual"),
+  country: text(100).default(""),
+  ICE: text(30).default(""),
+  billingName: text(160).default(""),
   name: text(120).min(2),
   email: z.union([z.email().max(200), z.literal("")]),
   phone: text(40),

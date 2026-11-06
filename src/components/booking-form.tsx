@@ -1,14 +1,17 @@
 "use client";
+import Dropdown from "./dropdown";
+import { useSiteDate } from "./site-date";
 import { useTranslations } from "@/i18n/provider";
 import { useState, useRef, useEffect, useId } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, ArrowLeft, LockKeyhole } from "lucide-react";
 import type { Listing } from "@/lib/types";
-import { cities, money, today } from "@/lib/catalog";
+import { cities, money } from "@/lib/catalog";
 import { plans, quote } from "@/lib/pricing";
 import { useHydrated } from "./accessibility";
 export default function BookingForm({ listing }: { listing: Listing }) {
   const t = useTranslations();
+  const today = useSiteDate();
   const hydrated = useHydrated();
   const params = useSearchParams(),
     router = useRouter();
@@ -168,7 +171,7 @@ export default function BookingForm({ listing }: { listing: Listing }) {
                   required
                   type="date"
                   value={form.start}
-                  min={today()}
+                  min={today}
                   onChange={(e) => update("start", e.target.value)}
                 />
               </label>
@@ -179,26 +182,24 @@ export default function BookingForm({ listing }: { listing: Listing }) {
                     disabled={!hydrated || busy}
                     required
                     type="date"
-                    min={form.start || today()}
+                    min={form.start || today}
                     value={form.end}
                     onChange={(e) => update("end", e.target.value)}
                   />
                 </label>
               ) : (
-                <label>
-                  {t("Guests")}
-                  <select
-                    disabled={!hydrated || busy}
-                    value={form.guests}
-                    onChange={(e) => update("guests", +e.target.value)}
-                  >
-                    {Array.from({ length: listing.seats }, (_, i) => (
-                      <option key={i} value={i + 1}>
-                        {i + 1} {i ? t("guests") : t("guest")}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <Dropdown
+                  label={<>{t("Guests")}</>}
+                  disabled={!hydrated || busy}
+                  value={form.guests}
+                  onChange={(e) => update("guests", +e.target.value)}
+                >
+                  {Array.from({ length: listing.seats }, (_, i) => (
+                    <option key={i} value={i + 1}>
+                      {i + 1} {i ? t("guests") : t("guest")}
+                    </option>
+                  ))}
+                </Dropdown>
               )}
             </div>
             <label>
@@ -219,21 +220,19 @@ export default function BookingForm({ listing }: { listing: Listing }) {
             </label>
             {isCar && (
               <>
-                <label>
-                  {t("Return city")}
-                  <select
-                    disabled={!hydrated || busy}
-                    aria-label={t("Return city")}
-                    value={form.returnCity}
-                    onChange={(e) => update("returnCity", e.target.value)}
-                  >
-                    {cities.map((c) => (
-                      <option key={c} value={c}>
-                        {t(c)}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <Dropdown
+                  label={<>{t("Return city")}</>}
+                  disabled={!hydrated || busy}
+                  aria-label={t("Return city")}
+                  value={form.returnCity}
+                  onChange={(e) => update("returnCity", e.target.value)}
+                >
+                  {cities.map((c) => (
+                    <option key={c} value={c}>
+                      {t(c)}
+                    </option>
+                  ))}
+                </Dropdown>
                 {form.returnCity !== listing.city && (
                   <div className="notice">
                     {t(
@@ -241,25 +240,23 @@ export default function BookingForm({ listing }: { listing: Listing }) {
                     )}
                   </div>
                 )}
-                <label>
-                  {t("Child seats \u00B7 \u20AC5 / seat / day")}
-                  <select
-                    disabled={!hydrated || busy}
-                    value={form.extras}
-                    onChange={(e) => update("extras", +e.target.value)}
-                  >
-                    {[0, 1, 2, 3].map((n) => (
-                      <option key={n} value={n}>
-                        {n === 0
-                          ? t("No child seats")
-                          : t("{0} {1}", {
-                              "0": n,
-                              "1": t(n === 1 ? "seat" : "seats"),
-                            })}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <Dropdown
+                  label={<>{t("Child seats \u00B7 \u20AC5 / seat / day")}</>}
+                  disabled={!hydrated || busy}
+                  value={form.extras}
+                  onChange={(e) => update("extras", +e.target.value)}
+                >
+                  {[0, 1, 2, 3].map((n) => (
+                    <option key={n} value={n}>
+                      {n === 0
+                        ? t("No child seats")
+                        : t("{0} {1}", {
+                            "0": n,
+                            "1": t(n === 1 ? "seat" : "seats"),
+                          })}
+                    </option>
+                  ))}
+                </Dropdown>
               </>
             )}
           </>
@@ -359,7 +356,7 @@ export default function BookingForm({ listing }: { listing: Listing }) {
                     disabled={!hydrated || busy}
                     type="date"
                     required
-                    max={today()}
+                    max={today}
                     value={form.dob}
                     onChange={(e) => update("dob", e.target.value)}
                   />
@@ -370,7 +367,7 @@ export default function BookingForm({ listing }: { listing: Listing }) {
                     disabled={!hydrated || busy}
                     type="date"
                     required
-                    max={today()}
+                    max={today}
                     value={form.licenceDate}
                     onChange={(e) => update("licenceDate", e.target.value)}
                   />
@@ -456,6 +453,22 @@ export default function BookingForm({ listing }: { listing: Listing }) {
                 <span>{t(money(price.addOns, t.locale))}</span>
               </div>
             )}
+            <div>
+              <span>{t("Platform service fee — 5%")}</span>
+              <span>{money(price.serviceFee, t.locale)}</span>
+            </div>
+            <div>
+              <span>{t("Advance on service — 10%")}</span>
+              <span>{money(price.advance, t.locale)}</span>
+            </div>
+            <div>
+              <span>{t("Due to confirm your booking")}</span>
+              <span>{money(price.prepayment, t.locale)}</span>
+            </div>
+            <div>
+              <span>{t("Remaining rental balance")}</span>
+              <span>{money(price.balance, t.locale)}</span>
+            </div>
             <div className="total">
               <span>{t("Request total")}</span>
               <span>{t(money(price.total, t.locale))}</span>

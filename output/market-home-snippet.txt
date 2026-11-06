@@ -1,0 +1,61 @@
+export function KraCarHome() {
+  const t = useTranslations();
+  const [service, setService] = useState<"cars" | "activities">("cars");
+  const { data, error, mutate } = useSWR<Catalogue>("/api/rental-cars", fetchJson);
+  function switchService(event: React.KeyboardEvent<HTMLButtonElement>) {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const next = event.key === "Home" ? "cars" : event.key === "End" ? "activities" : service === "cars" ? "activities" : "cars";
+    setService(next);
+    document.getElementById(`${next === "cars" ? "cars" : "activities"}-tab`)?.focus();
+  }
+  return (
+    <div className="market-home">
+      <div className="market-intro">
+        <section className="market-hero">
+          <div className="market-hero-photo"><Image src="/images/duster.jpg" alt={t("A rental car on a road through Morocco")} fill priority sizes="(max-width:700px) 100vw, 75vw"/></div>
+          <div className="market-hero-copy">
+            <p className="market-overline"><MapPin size={14} aria-hidden="true"/>{t("Made for your time in Morocco")}</p>
+            <h1>{t("Pick your car.")}<br/><span>{t("Find your Morocco.")}</span></h1>
+            <p className="market-hero-description">{t("Car rentals and local experiences, all in one place. Compare the details. Make your own plans.")}</p>
+            <a className="market-hero-link" href="#find-your-journey">{t("Find your next trip")}<ArrowRight size={18} aria-hidden="true"/></a>
+          </div>
+          <div className="market-photo-note"><CarFront size={18} aria-hidden="true"/><div><strong>{t("Room for a different route")}</strong><span>{t("Illustrative vehicle photography")}</span></div></div>
+        </section>
+        <section className="market-search" id="find-your-journey" aria-label={t("Find a car or activity")}>
+          <div className="market-search-tabs" role="tablist" aria-label={t("Choose a service")}>
+            <button id="cars-tab" role="tab" tabIndex={service === "cars" ? 0 : -1} aria-selected={service === "cars"} aria-controls="market-search-content" onClick={()=>setService("cars")} onKeyDown={switchService}><CarFront size={19} aria-hidden="true"/>{t("Car rentals")}</button>
+            <button id="activities-tab" role="tab" tabIndex={service === "activities" ? 0 : -1} aria-selected={service === "activities"} aria-controls="market-search-content" onClick={()=>setService("activities")} onKeyDown={switchService}><MapPin size={18} aria-hidden="true"/>{t("Things to do")}</button>
+            <p><ShieldCheck size={15} aria-hidden="true"/>{t("Conditions available before you book")}</p>
+          </div>
+          <div id="market-search-content" role="tabpanel" aria-labelledby={service === "cars" ? "cars-tab" : "activities-tab"}>
+            {service === "cars" ? <RentalSearch/> : <form className="kc-search market-activity-search" action="/explore"><input type="hidden" name="category" value="activities"/><label>{t("Your destination")}<select name="city"><option value="">{t("All cities")}</option>{rentalCities.map(city=><option key={city} value={city}>{t(city)}</option>)}</select></label><p>{t("Surf sessions, city discoveries and a different side of Morocco.")}</p><button className="button">{t("Explore experiences")}<ArrowRight size={18} aria-hidden="true"/></button></form>}
+          </div>
+        </section>
+        <div className="market-booking-note"><span>{t("Local partners. One place to book.")}</span><p>{t("10% advance on the service · 5% platform fee · the balance paid to your partner")}</p><Link href="/policies/reservation">{t("How booking works")}<ArrowUpRight size={14} aria-hidden="true"/></Link></div>
+      </div>
+
+      <section className="market-container market-fleet">
+        <div className="market-section-heading"><div><p className="market-label">{t("For the road ahead")}</p><h2>{t("A car that fits your plans.")}</h2></div><Link className="market-link" href="/cars">{t("View all cars")}<ArrowUpRight size={19} aria-hidden="true"/></Link></div>
+        <nav className="market-car-types" aria-label={t("Browse cars by category")}><Link href="/cars">{t("All cars")}</Link><Link href="/cars?category=economy">{t("City cars")}</Link><Link href="/cars?category=suv">{t("SUVs")}</Link><Link href="/cars?category=premium">{t("Premium")}</Link><Link href="/cars?transmission=automatic">{t("Automatic")}</Link></nav>
+        {error ? <div className="market-catalog-message" role="status"><CarFront size={24} aria-hidden="true"/><div><h3>{t("The car selection is taking a little longer to load.")}</h3><p>{t("Retry the search or ask our team for help with your dates.")}</p></div><button className="button secondary" onClick={()=>void mutate()}>{t("Try again")}</button><Link className="text-link" href="/support">{t("Help & support")}</Link></div> : !data ? <div className="market-loading" aria-label={t("Loading cars")}><div/><div/><div/></div> : data.cars.length ? <div className="kc-car-grid">{data.cars.slice(0,3).map(car=><RentalCarCard key={car.id} car={car}/>)}</div> : <div className="market-catalog-message"><p>{t("No cars match these dates and filters")}</p><Link className="market-link" href="/cars">{t("Find a car")}<ArrowRight size={17}/></Link></div>}
+      </section>
+
+      <section className="market-container market-places">
+        <div className="market-section-heading"><div><p className="market-label">{t("More than the drive")}</p><h2>{t("Make a day of it.")}</h2></div><Link className="market-link" href="/explore?category=activities">{t("Explore experiences")}<ArrowUpRight size={19} aria-hidden="true"/></Link></div>
+        <div className="market-place-grid">{[
+          {city:"Marrakech",image:"marrakech.jpg",text:"The city, beyond the postcard"},
+          {city:"Essaouira",image:"essaouira-coast.jpg",text:"A slower pace by the Atlantic"},
+          {city:"Agadir",image:"surf.jpg",text:"A good day starts by the sea"},
+        ].map(place=><Link key={place.city} className="market-place" href={`/explore?category=activities&city=${place.city}`}><div className="market-place-image"><Image src={`/images/${place.image}`} alt={t(place.city)} fill sizes="(max-width:640px) 90vw, 33vw"/><span>{t("Explore")}</span></div><div className="market-place-caption"><div><h3>{t(place.city)}</h3><p>{t(place.text)}</p></div><span className="market-circle-arrow"><ArrowUpRight size={20} aria-hidden="true"/></span></div></Link>)}</div>
+      </section>
+
+      <section className="market-container market-payment">
+        <div className="market-payment-copy"><p className="market-label">{t("Before you confirm")}</p><h2>{t("The full price.")}<br/>{t("Already on the table.")}</h2><p>{t("See your partner’s price, our service fee and what is left to pay before making a commitment.")}</p><div className="market-payment-questions"><details><summary>{t("What do I pay to confirm?")}</summary><p>{t("After partner approval, the initial payment is a 10% advance on the service plus the 5% platform fee. The remaining 90% of the service price is due to your partner.")}</p></details><details><summary>{t("Is the security deposit included?")}</summary><p>{t("The security deposit is separate from the service price and advance. Check your partner’s amount and return conditions on the offer.")}</p></details><details><summary>{t("Who provides my service?")}</summary><p>{t("Your chosen partner provides the car or activity. KraCar connects you with the partner and keeps your reservation and documents together.")}</p></details></div></div>
+        <div className="market-price-card"><div className="market-price-card-title"><span>{t("An example booking")}</span><span>MAD</span></div><p className="market-example-total"><span>{t("Total including service fee")}</span><strong>2 100<span> MAD</span></strong></p><dl>{[["Partner service price incl. tax","2 000"],["Platform service fee — 5%","100"]].map(([label,amount])=><div key={label}><dt>{t(label)}</dt><dd>{amount}</dd></div>)}</dl><div className="market-price-due"><div><span>{t("Due to confirm your booking")}</span><strong>300 MAD</strong></div><p>{t("10% advance + 5% platform fee")}</p></div><dl><div><dt>{t("Remaining rental balance")}</dt><dd>1 800 MAD</dd></div></dl><p className="market-example-disclaimer">{t("Illustration for a 2,000 MAD service. The security deposit is separate.")}</p></div>
+      </section>
+
+      <section className="market-container market-partner"><div><p className="market-label">{t("For rental and tourism professionals")}</p><h2>{t("Your business. A wider audience.")}</h2><p>{t("Publish your offers and manage your clients, reservations and documents from one workspace.")}</p></div><div className="market-partner-actions"><Link className="button" href="/partners">{t("Become a partner")}<ArrowUpRight size={18} aria-hidden="true"/></Link><Link className="market-link" href="/login">{t("Partner sign in")}<ArrowRight size={16} aria-hidden="true"/></Link></div></section>
+    </div>
+  );
+}

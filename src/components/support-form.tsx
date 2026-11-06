@@ -1,9 +1,14 @@
 "use client";
+import Dropdown from "./dropdown";
 import { useTranslations } from "@/i18n/provider";
 import { useState } from "react";
 import Link from "next/link";
 import { Send, Check } from "lucide-react";
-export default function SupportForm() {
+export default function SupportForm({
+  reference = "",
+}: {
+  reference?: string;
+}) {
   const t = useTranslations();
   const [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
@@ -78,27 +83,31 @@ export default function SupportForm() {
                 />
               </label>
             </div>
+            <Dropdown
+              label={<>{t("What can we help with?")}</>}
+              name="subject"
+              required
+              defaultValue={reference ? "Existing reservation" : ""}
+            >
+              <option value="">{t("Choose a topic")}</option>
+              <option value="Planning my trip">{t("Planning my trip")}</option>
+              <option value="Existing reservation">
+                {t("Existing reservation")}
+              </option>
+              <option value="Changes or cancellations">
+                {t("Changes or cancellations")}
+              </option>
+              <option value="Agency access">{t("Agency access")}</option>
+              <option value="Something else">{t("Something else")}</option>
+            </Dropdown>
             <label>
-              {t("What can we help with?")}
-              <select name="subject" required>
-                <option value="">{t("Choose a topic")}</option>
-                <option value="Planning my trip">
-                  {t("Planning my trip")}
-                </option>
-                <option value="Existing reservation">
-                  {t("Existing reservation")}
-                </option>
-                <option value="Changes or cancellations">
-                  {t("Changes or cancellations")}
-                </option>
-                <option value="Agency access">{t("Agency access")}</option>
-                <option value="Something else">{t("Something else")}</option>
-              </select>
-            </label>
-            <label>
-              {t("Your message")}
+              <span id="support-message-label">{t("Your message")}</span>
               <textarea
+                aria-labelledby="support-message-label"
                 name="message"
+                defaultValue={
+                  reference ? `${t("Booking reference")}: ${reference}\n\n` : ""
+                }
                 required
                 minLength={10}
                 maxLength={3000}

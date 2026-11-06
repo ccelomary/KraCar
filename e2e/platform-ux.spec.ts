@@ -1,3 +1,4 @@
+import { selectDropdown } from "./support/select";
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 let errors: string[] = [];
@@ -44,14 +45,14 @@ test("work queues open filtered views and reservation pages reset with filters",
   await expect(page).toHaveURL(/bookings\?status=requested/);
   await expect(
     page.getByRole("combobox", { name: "Filter by reservation status" }),
-  ).toHaveValue("requested");
+  ).toHaveAttribute("data-value", "requested");
   await expect(
     page.locator(".reservation-desktop tbody tr .badge").first(),
   ).toHaveText("Requested");
   await page.getByRole("tab", { name: /All reservations/ }).click();
   await expect(
     page.getByRole("combobox", { name: "Filter by reservation status" }),
-  ).toHaveValue("all");
+  ).toHaveAttribute("data-value", "all");
   await page.getByRole("button", { name: "Next page", exact: true }).click();
   await expect(page.getByText(/Page 2 of/)).toBeVisible();
   await page.getByRole("tab", { name: /Needs review/ }).click();
@@ -59,7 +60,7 @@ test("work queues open filtered views and reservation pages reset with filters",
   await page.reload();
   await expect(
     page.getByRole("combobox", { name: "Filter by reservation status" }),
-  ).toHaveValue("requested");
+  ).toHaveAttribute("data-value", "requested");
   await scan(page);
 });
 test("agency filters have useful empty states and suspension requires confirmation", async ({
@@ -118,9 +119,10 @@ test("support filters, mobile navigation and Arabic layouts remain usable", asyn
   await scan(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/platform");
-  await page
-    .getByRole("combobox", { name: "Language", exact: true })
-    .selectOption("ar");
+  await selectDropdown(
+    page.getByRole("combobox", { name: "Language", exact: false }),
+    "ar",
+  );
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(
     390,

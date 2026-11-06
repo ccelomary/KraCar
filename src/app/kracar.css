@@ -1,0 +1,472 @@
+.kc-hero {
+  background: var(--color-ink);
+  color: var(--color-white);
+  padding-block: 4.5rem 6rem;
+}
+.kc-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.kc-hero h1 {
+  font-family: var(--font-sans);
+  font-size: clamp(2.4rem, 4vw, 4.25rem);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  max-width: 14ch;
+  margin-block: 1rem 1.5rem;
+}
+.kc-hero .eyebrow {
+  color: var(--color-lime);
+}
+.kc-hero p {
+  font-size: 1.1rem;
+  max-width: 42ch;
+  opacity: 0.9;
+}
+.kc-hero-trust {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+.kc-hero-photo {
+  position: relative;
+  aspect-ratio: 5/4;
+  overflow: hidden;
+  border-radius: 2rem;
+}
+.kc-hero-photo img {
+  object-fit: cover;
+}
+.kc-hero-photo > span {
+  position: absolute;
+  bottom: 1rem;
+  inset-inline-start: 1rem;
+  background: var(--color-ink);
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-control);
+}
+.kc-search {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 1rem;
+  align-items: end;
+  padding: 1.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  margin-top: -3rem;
+}
+.kc-search .button {
+  min-height: 2.9rem;
+}
+.kc-section {
+  padding-block: 3rem;
+}
+.kc-section h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+.kc-car-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.kc-car-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  min-width: 0;
+  box-shadow: var(--shadow-card);
+}
+.kc-car-card a {
+  display: block;
+}
+.kc-card-photo {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--color-canvas);
+}
+.kc-card-photo img {
+  object-fit: cover;
+  transition: transform 0.25s;
+}
+.kc-car-card a:hover .kc-card-photo img {
+  transform: scale(1.025);
+}
+.kc-card-photo .badge {
+  position: absolute;
+  top: 1rem;
+  inset-inline-start: 1rem;
+}
+.kc-car-content {
+  padding: 1.25rem;
+}
+.kc-car-content h3 {
+  font-size: 1.3rem;
+  margin: 0.35rem 0 0.75rem;
+}
+.kc-card-price {
+  border-top: 1px solid var(--color-line);
+  padding-top: 1rem;
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.kc-card-price strong {
+  font-size: 1.3rem;
+  color: var(--color-brand);
+}
+.kc-card-price svg {
+  margin-inline-start: auto;
+}
+.kc-steps {
+  padding: 2.5rem 0 4rem;
+}
+.kc-steps article {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--color-line);
+}
+.kc-partner {
+  background: var(--color-brand-soft);
+  border-radius: var(--radius-card);
+  padding: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+.kc-partner p {
+  max-width: 55ch;
+}
+.kc-catalog-layout {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+.kc-filters {
+  padding: 1.25rem;
+  display: grid;
+  gap: 1rem;
+}
+.kc-filters h2 {
+  font-size: 1.1rem;
+}
+.kc-car-grid.results {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.kc-compare-check {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  line-height: 1.5;
+}
+.kc-car-card > .kc-compare-check {
+  padding: 0 1.25rem 1.25rem;
+}
+.kc-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+.kc-table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.kc-table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.kc-table-scroll th,
+.kc-table-scroll td {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--color-line);
+  text-align: start;
+}
+.kc-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 1fr);
+  gap: 2.5rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+.kc-detail-photo {
+  position: relative;
+  aspect-ratio: 16/10;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-canvas);
+}
+.kc-detail-photo img {
+  object-fit: contain;
+}
+.kc-booking {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.2rem;
+}
+.kc-booking fieldset {
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  padding: 0.75rem;
+  display: grid;
+  gap: 0.8rem;
+}
+.kc-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-block: 1.5rem;
+}
+.kc-detail-section {
+  border-top: 1px solid var(--color-line);
+  padding-block: 1.5rem;
+}
+.kc-detail-section .card {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+.kc-detail-section dd {
+  max-width: 65%;
+  overflow-wrap: anywhere;
+}
+.kc-auth {
+  max-width: 30rem;
+  margin: 3rem auto;
+  padding: 2rem;
+}
+.kc-workspace {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  min-height: 80vh;
+}
+.kc-work-nav {
+  padding: 1.5rem;
+  background: var(--color-ink);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.kc-work-nav a,
+.kc-work-nav button {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-control);
+  text-align: start;
+}
+.kc-work-nav a[aria-current="page"] {
+  background: var(--color-brand);
+}
+.kc-work-main {
+  padding: 2rem;
+  min-width: 0;
+}
+.kc-work-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-block: 1.25rem;
+}
+.kc-work-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  gap: 1.25rem;
+}
+.kc-work-card {
+  padding: 1.25rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.kc-work-card h2,
+.kc-work-card h3 {
+  font-size: 1.1rem;
+}
+.kc-work-card .row {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.kc-work-card dl {
+  font-size: 0.85rem;
+}
+.kc-mini-photo {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: var(--radius-control);
+  margin-bottom: 1rem;
+}
+.kc-operation-form {
+  display: grid;
+  gap: 1rem;
+}
+.kc-operation-form fieldset {
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  padding: 1rem;
+  border-radius: var(--radius-control);
+}
+.kc-document {
+  max-width: 52rem;
+  margin: auto;
+  padding: 3rem;
+  background: var(--color-surface);
+  font-family: Arial, sans-serif;
+  line-height: 1.65;
+}
+.kc-document header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 2px solid var(--color-brand);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+.kc-document table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.kc-document td,
+.kc-document th {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--color-line);
+  text-align: start;
+}
+.kc-document pre {
+  font: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1000px) {
+  .kc-car-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .kc-hero-grid {
+    gap: 2rem;
+  }
+  .kc-search {
+    grid-template-columns: 1fr 1fr;
+  }
+  .kc-detail-layout {
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 760px) {
+  .kc-hero {
+    padding-block: 2.5rem 5rem;
+  }
+  .kc-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .kc-hero h1 {
+    max-width: 18ch;
+  }
+  .kc-hero-photo {
+    aspect-ratio: 16/9;
+  }
+  .kc-search {
+    padding: 1.25rem;
+    gap: 0.85rem;
+  }
+  .kc-catalog-layout,
+  .kc-detail-layout {
+    grid-template-columns: 1fr;
+  }
+  .kc-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+  .kc-filters h2 {
+    grid-column: 1/-1;
+  }
+  .kc-partner {
+    flex-direction: column;
+    align-items: start;
+    padding: 1.5rem;
+  }
+  .kc-workspace {
+    grid-template-columns: 1fr;
+  }
+  .kc-work-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0.75rem;
+  }
+  .kc-work-nav a {
+    white-space: nowrap;
+  }
+  .kc-work-nav h2 {
+    display: none;
+  }
+  .kc-work-main {
+    padding: 1.25rem;
+  }
+  .kc-document {
+    padding: 1.25rem;
+  }
+}
+@media (max-width: 480px) {
+  .kc-car-grid,
+  .kc-car-grid.results,
+  .kc-search,
+  .kc-filters {
+    grid-template-columns: 1fr;
+  }
+  .kc-hero h1 {
+    font-size: 2.45rem;
+  }
+  .kc-hero-photo {
+    border-radius: var(--radius-card);
+  }
+  .kc-auth {
+    padding: 1.25rem;
+    margin: 1.5rem 0.75rem;
+  }
+  .kc-booking {
+    padding: 1.25rem;
+  }
+}
+@media (max-width: 640px) {
+  .kc-account-link .kc-account-label {
+    display: none;
+  }
+  .public-header-actions > a[href="/login"] {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kc-card-photo img {
+    transition: none;
+  }
+}
+@media print {
+  .kc-document {
+    max-width: none;
+    padding: 0;
+  }
+  .kc-document header {
+    break-inside: avoid;
+  }
+  .kc-document tr {
+    break-inside: avoid;
+  }
+  .kc-document h2 {
+    break-after: avoid;
+  }
+}

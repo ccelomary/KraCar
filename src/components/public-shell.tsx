@@ -1,4 +1,5 @@
 "use client";
+import { useSiteDate } from "./site-date";
 import { useTranslations } from "@/i18n/provider";
 import LanguageSwitcher from "./language-switcher";
 import Link from "next/link";
@@ -10,15 +11,7 @@ import {
   useCallback,
 } from "react";
 import { useNavigationFocus } from "./accessibility";
-import {
-  Menu,
-  X,
-  ArrowUpRight,
-  Headphones,
-  ChevronDown,
-  MessageCircle,
-  ArrowUp,
-} from "lucide-react";
+import { Menu, X, Headphones, UserRound } from "lucide-react";
 import { Brand } from "./ui";
 export function PublicHeader() {
   const t = useTranslations();
@@ -31,7 +24,9 @@ export function PublicHeader() {
   return (
     <div className="site-header" role="banner">
       <div className="announcement">
-        <span>{t("Morocco, made easier. Car rentals & things to do.")}</span>
+        <span>
+          {t("KraCar — local partners, car rentals & experiences in Morocco")}
+        </span>
         <Link href="/support">{t("Here to help")}</Link>
       </div>
       <div className="public-header">
@@ -42,38 +37,15 @@ export function PublicHeader() {
           className={`public-nav ${open ? "open" : ""}`}
           aria-label={t("Main navigation")}
         >
-          <details
-            className="travel-menu"
-            onKeyDown={(e) => {
-              if (e.key === "Escape") {
-                e.preventDefault();
-                e.currentTarget.open = false;
-                e.currentTarget.querySelector("summary")?.focus();
-              }
-            }}
+          <Link onClick={() => setOpen(false)} href="/cars">
+            {t("Rent a car")}
+          </Link>
+          <Link
+            onClick={() => setOpen(false)}
+            href="/explore?category=activities"
           >
-            <summary>
-              {t("Explore Morocco")}
-              <ChevronDown aria-hidden="true" focusable="false" size={14} />
-            </summary>
-            <div className="travel-menu-items">
-              <Link href="/explore?category=cars">{t("Car rentals")}</Link>
-              <Link href="/explore?category=activities">
-                {t("Things to do")}
-              </Link>
-            </div>
-          </details>
-          <div className="mobile-service-links">
-            <Link onClick={() => setOpen(false)} href="/explore?category=cars">
-              {t("Car rentals")}
-            </Link>
-            <Link
-              onClick={() => setOpen(false)}
-              href="/explore?category=activities"
-            >
-              {t("Things to do")}
-            </Link>
-          </div>
+            {t("Find an activity")}
+          </Link>
           <Link onClick={() => setOpen(false)} href="/support">
             <Headphones aria-hidden="true" focusable="false" size={16} />
             {t("Help & support")}
@@ -89,14 +61,12 @@ export function PublicHeader() {
         <div className="public-header-actions">
           <LanguageSwitcher />
           <Link
-            href="/login"
-            className="button secondary"
-            aria-label={t("Partner sign in")}
+            href="/account?tab=bookings"
+            className="button ghost kc-account-link"
+            aria-label={t("My bookings")}
           >
-            <span className="partner-signin-label">
-              {t("Partner sign in ")}
-            </span>
-            <ArrowUpRight aria-hidden="true" focusable="false" size={14} />
+            <UserRound size={18} aria-hidden="true" />
+            <span className="kc-account-label">{t("My bookings")}</span>
           </Link>
           <button
             ref={toggle}
@@ -119,6 +89,7 @@ export function PublicHeader() {
 }
 export function PublicFooter() {
   const t = useTranslations();
+  const today = useSiteDate();
   return (
     <footer className="public-footer">
       <div className="public-container">
@@ -127,13 +98,13 @@ export function PublicFooter() {
             <Brand />
             <p>
               {t(
-                "Local connections. Open roads. A little more Morocco, at your own pace.",
+                "KraCar connects you with car rental and tourism professionals in Morocco. Your partner provides the service. Your journey stays in one place.",
               )}
             </p>
           </div>
           <div>
             <h2>{t("Your next journey")}</h2>
-            <Link href="/explore?category=cars">{t("Find your car")}</Link>
+            <Link href="/cars">{t("Find your car")}</Link>
             <Link href="/explore?category=activities">
               {t("Local experiences")}
             </Link>
@@ -144,16 +115,16 @@ export function PublicFooter() {
             <Link href="/partners">{t("Become a partner")}</Link>
             <Link href="/login">{t("Partner workspace")}</Link>
             <Link href="/faq">{t("Common questions")}</Link>
-            <Link href="/about">{t("About Atlas")}</Link>
-            <Link href="/blog">{t("Atlas travel notes")}</Link>
+            <Link href="/about">{t("About KraCar")}</Link>
+            <Link href="/blog">{t("Morocco travel notes")}</Link>
             <Link href="/policies/privacy">{t("Privacy & cookies")}</Link>
           </div>
         </div>
         <div className="footer-bottom">
           <span>
             {t("\u00A9 ")}
-            {new Date().getFullYear()}
-            {t(" Atlas Journeys. An independent travel platform.")}
+            {today.slice(0, 4)}
+            {t(" KraCar. Moroccan car rental marketplace.")}
           </span>
           <div className="row">
             <Link href="/policies/terms">{t("Booking terms")}</Link>
@@ -162,7 +133,7 @@ export function PublicFooter() {
               {t("Cancellation policy")}
             </Link>
             <span>{t("\u00B7")}</span>
-            <span>{t("Prices in EUR")}</span>
+            <span>{t("Check the currency on each offer")}</span>
           </div>
         </div>
       </div>
@@ -230,54 +201,7 @@ export default function PublicShell({
       <PublicHeader />
       {children}
       <PublicFooter />
-      <FloatingHelp />
       <CookiesNotice />
-    </div>
-  );
-}
-
-function FloatingHelp() {
-  const t = useTranslations();
-  const [open, setOpen] = useState(false);
-  return (
-    <div
-      className="floating-tools"
-      role="complementary"
-      aria-label={t("Help & support")}
-    >
-      {open && (
-        <aside className="help-popover" aria-label={t("Help & support")}>
-          <div className="row between">
-            <h3>{t("How can we help?")}</h3>
-            <button
-              className="icon-button"
-              onClick={() => setOpen(false)}
-              aria-label={t("Close")}
-            >
-              <X aria-hidden="true" focusable="false" size={16} />
-            </button>
-          </div>
-          <p>{t("Choose a service or send a message to our team.")}</p>
-          <Link href="/support" className="button">
-            {t("Help & support")}
-            <ArrowUpRight aria-hidden="true" focusable="false" size={15} />
-          </Link>
-          <Link href="/faq" className="text-link">
-            {t("Common questions")}
-          </Link>
-        </aside>
-      )}
-      <button
-        className="help-fab"
-        aria-label={t("How can we help?")}
-        aria-expanded={open}
-        onClick={() => setOpen(!open)}
-      >
-        <MessageCircle aria-hidden="true" focusable="false" size={26} />
-      </button>
-      <a href="#main-content" className="top-fab" aria-label={t("Back to top")}>
-        <ArrowUp aria-hidden="true" focusable="false" size={18} />
-      </a>
     </div>
   );
 }

@@ -8,12 +8,50 @@ const policies: Record<
     sections: [string, string][];
   }
 > = {
+  partnership: {
+    title: "Partnership agreement",
+    sections: [
+      [
+        "Professional identity",
+        "Partners must provide accurate business, tax, insurance, authorisation and settlement details. Offers may be published only after review of the business and contractual conditions.",
+      ],
+      [
+        "Partner responsibilities",
+        "The partner provides the service, maintains accurate offers, prices and availability, honours accepted bookings and issues its service invoice. KraCar provides intermediation and separately invoices its service fee.",
+      ],
+      [
+        "Commission and settlement",
+        "Marketplace bookings add a 5% TTC platform fee to the partner TTC price after options and discounts. The initial amount is a 10% advance plus this 5% fee. The remaining 90% is due to the partner. Settlement timing and refund rules require an agreed partnership arrangement before live payments.",
+      ],
+      [
+        "Conditions and complaints",
+        "Partner conditions are reviewed before publication. The version accepted for a reservation remains attached to that reservation. Contact support with the booking reference for changes or complaints.",
+      ],
+    ],
+  },
+  reservation: {
+    title: "Booking conditions",
+    sections: [
+      [
+        "Reservation requests",
+        "Submitting a request does not confirm availability. The partner reviews the request. Confirmation requires the partner’s approval and verified payment of the required advance and platform fee.",
+      ],
+      [
+        "Prices and deposits",
+        "The 10% advance is part of the partner service price. The 5% platform fee is added to that price. Both are calculated on the TTC price after options and discounts. The security deposit is separate. Fees are not charged again with the remaining balance.",
+      ],
+      [
+        "Applicable conditions",
+        "The partner identity, offer details and conditions must be reviewed before acceptance. The accepted version, acceptance date and client identity are retained with the reservation. Contact support to request changes or report a problem.",
+      ],
+    ],
+  },
   terms: {
     title: "A clear start to your journey",
     sections: [
       [
         "About this preview",
-        "Atlas Journeys is an independent travel application in development. Its local preview uses fictional agencies, travelers, prices, and reservations. No real inventory or commercial agreement is implied.",
+        "KraCar is an intermediation platform for car rentals and tourism activities in Morocco. It connects travellers and residents with professional partners. The partner identified on the offer provides the service. KraCar manages discovery, booking coordination and access to documents.",
       ],
       [
         "Reservation requests",
@@ -21,7 +59,7 @@ const policies: Record<
       ],
       [
         "Prices and deposits",
-        "Prices are shown in EUR. Car rentals use calendar-date durations, with each date-to-date interval billed as a day. Activities are per person. Selected cover and extras are itemized. Refundable security deposits are separate from the reservation total.",
+        "The 10% advance is part of the partner service price. The 5% platform fee is added to that price. Both are calculated on the TTC price after options and discounts. The security deposit is separate. Fees are not charged again with the remaining balance.",
       ],
       [
         "Eligibility and delivery",
@@ -29,7 +67,7 @@ const policies: Record<
       ],
       [
         "Payments and confirmation",
-        "This version collects no card details or payments. Approval only changes the reservation to awaiting payment. A production payment and inventory workflow must be configured before real bookings can be confirmed.",
+        "Submitting a request does not confirm availability. The partner reviews the request. Confirmation requires the partner’s approval and verified payment of the required advance and platform fee.",
       ],
       [
         "Before commercial launch",
@@ -79,7 +117,7 @@ const policies: Record<
       ],
       [
         "Services and data location",
-        "Data is stored in the configured MongoDB database. Local development uses a local MongoDB process. Images are served from this application after being sourced from Unsplash; no original reference-site assets are shipped. Production hosting, email, payments, retention periods, and operator contact details must be finalized before launch.",
+        "Rental accounts, reservations, payments and documents are stored in the configured PostgreSQL database. The activity catalogue and legacy management use MongoDB. Access is scoped to the client, relevant partner and authorised administrators. Production hosting, email delivery, payments and retention policies must be configured before launch.",
       ],
       [
         "Your requests",

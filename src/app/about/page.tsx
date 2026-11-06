@@ -3,7 +3,7 @@ import { getTranslator, localizeMetadata } from "@/i18n/server";
 import Image from "next/image";
 import Link from "next/link";
 export async function generateMetadata() {
-  return localizeMetadata({ title: "About Atlas" });
+  return localizeMetadata({ title: "About KraCar" });
 }
 export default async function About() {
   const t = await getTranslator();
@@ -21,7 +21,7 @@ export default async function About() {
           <h1>{t("A little closer to Morocco")}</h1>
           <p>
             {t(
-              "One place to plan the road, the coast and everything in between.",
+              "KraCar connects travellers and residents with car rental and tourism professionals in Morocco. Your partner provides the service. We make it easier to discover, request and follow your booking.",
             )}
           </p>
         </div>
@@ -50,7 +50,7 @@ export default async function About() {
           </div>
         </div>
         <div className="info-help">
-          <h2>{t("Bring your business to Atlas")}</h2>
+          <h2>{t("Bring your business to KraCar")}</h2>
           <Link href="/partners" className="button secondary">
             {t("Become a partner")}
           </Link>

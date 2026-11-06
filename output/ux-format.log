@@ -1,0 +1,6 @@
+src/components/rental-booking-panel.tsx 315ms
+src/components/kracar-marketplace.tsx 325ms
+src/components/support-form.tsx 49ms (unchanged)
+src/components/public-shell.tsx 65ms (unchanged)
+src/app/journey.css 289ms
+e2e/booking-journey.spec.ts 98ms
