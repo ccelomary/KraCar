@@ -3,7 +3,7 @@ import GuideCard from "@/components/guide-card";
 import { guides } from "@/lib/travel-guides";
 import { getTranslator, localizeMetadata } from "@/i18n/server";
 export async function generateMetadata() {
-  return localizeMetadata({ title: "Atlas travel notes" });
+  return localizeMetadata({ title: "KraCar travel notes" });
 }
 export default async function Blog() {
   const t = await getTranslator();
@@ -16,7 +16,7 @@ export default async function Blog() {
       >
         <div className="section-title">
           <span className="eyebrow">{t("Explore Morocco")}</span>
-          <h1>{t("Atlas travel notes")}</h1>
+          <h1>{t("KraCar travel notes")}</h1>
           <p>
             {t(
               "A little inspiration and practical thinking for your next journey.",

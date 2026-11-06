@@ -15,7 +15,7 @@ test(
     process.env.KRACAR_MONGODB_DB = "kracar_test";
     process.env.SESSION_SECRET =
       "mongo-integration-test-secret-at-least-32-characters";
-    process.env.APP_ORIGIN = "http://localhost:3000";
+    process.env.APP_ORIGIN = "http://127.0.0.1:3000";
     const { coreDb, coreTransaction } =
       await import("../../src/lib/kracar/client");
     const db = coreDb();
@@ -63,6 +63,67 @@ test(
         headers: new Headers({ cookie }),
       });
       assert.equal(session?.user.email, "mongo@example.com");
+      for (const origin of ["http://localhost:3000", "http://127.0.0.1:3000"]) {
+        const response = await auth.handler(
+          new Request(`${origin}/api/customer-auth/sign-in/email`, {
+            method: "POST",
+            headers: {
+              origin,
+              "content-type": "application/json",
+              "sec-fetch-site": "same-origin",
+            },
+            body: JSON.stringify({
+              email: "mongo@example.com",
+              password: "MongoTestPassword2026!",
+            }),
+          }),
+        );
+        assert.equal(response.status, 200, await response.text());
+      }
+      const rejected = await auth.handler(
+        new Request("http://localhost:3000/api/customer-auth/sign-in/email", {
+          method: "POST",
+          headers: {
+            origin: "https://untrusted.example",
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email: "mongo@example.com",
+            password: "MongoTestPassword2026!",
+          }),
+        }),
+      );
+      assert.equal(rejected.status, 403);
+      const testEnv: Record<string, string | undefined> = process.env;
+      const previousNodeEnv = testEnv.NODE_ENV;
+      testEnv.NODE_ENV = "production";
+      process.env.APP_ORIGIN = "https://kracar.vercel.app";
+      try {
+        const productionAuth = customerAuth();
+        for (const [origin, expected] of [
+          ["https://kracar.vercel.app", 200],
+          ["http://127.0.0.1:3000", 403],
+        ] as const) {
+          const response = await productionAuth.handler(
+            new Request(
+              "https://kracar.vercel.app/api/customer-auth/sign-in/email",
+              {
+                method: "POST",
+                headers: { origin, "content-type": "application/json" },
+                body: JSON.stringify({
+                  email: "mongo@example.com",
+                  password: "MongoTestPassword2026!",
+                }),
+              },
+            ),
+          );
+          assert.equal(response.status, expected, await response.text());
+        }
+      } finally {
+        if (previousNodeEnv === undefined) delete testEnv.NODE_ENV;
+        else testEnv.NODE_ENV = previousNodeEnv;
+        process.env.APP_ORIGIN = "http://127.0.0.1:3000";
+      }
 
       await db.agency.create({
         data: {

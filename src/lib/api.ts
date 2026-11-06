@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 import { getDb } from "./db";
 import { createHash } from "node:crypto";
 import { getTranslator } from "@/i18n/server";
+import { appOrigins } from "./app-origins";
 export function originAllowed(req: Request) {
   const origin = req.headers.get("origin");
   if (!origin) return false;
-  if (process.env.APP_ORIGIN)
-    return origin === new URL(process.env.APP_ORIGIN).origin;
+  if (process.env.APP_ORIGIN) return appOrigins().includes(origin);
   if (process.env.NODE_ENV === "production") return false;
   try {
     return (

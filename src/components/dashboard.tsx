@@ -179,7 +179,7 @@ function exportBookings(
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `atlas-reservations-${today()}.csv`;
+  a.download = `kracar-reservations-${today()}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }

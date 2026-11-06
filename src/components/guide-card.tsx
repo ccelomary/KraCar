@@ -21,7 +21,7 @@ export default async function GuideCard({
         alt={t(guide.title)}
       />
       <div>
-        <span className="eyebrow">{t("Atlas travel notes")}</span>
+        <span className="eyebrow">{t("KraCar travel notes")}</span>
         <Heading>{t(guide.title)}</Heading>
         <p>{t(guide.intro)}</p>
         <span className="text-link">

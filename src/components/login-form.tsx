@@ -45,7 +45,7 @@ export default function LoginForm({ demo }: { demo: boolean }) {
         <ArrowLeft aria-hidden="true" focusable="false" size={14} />
         {t("Back to exploring")}
       </Link>
-      <div className="eyebrow">{t("Your Atlas workspace")}</div>
+      <div className="eyebrow">{t("Your KraCar workspace")}</div>
       <h1>{t("Good to see you again.")}</h1>
       <p>{t("A clearer view of your business is just ahead.")}</p>
       <form
@@ -129,7 +129,7 @@ export default function LoginForm({ demo }: { demo: boolean }) {
         className="muted"
         style={{ marginTop: "2rem", fontSize: ".75rem", textAlign: "center" }}
       >
-        {t("New to Atlas?")}
+        {t("New to KraCar?")}
         {t(" ")}
         <Link href="/partners" className="text-link">
           {t("Become a partner")}

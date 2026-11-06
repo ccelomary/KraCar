@@ -80,7 +80,7 @@ export default function ManageBooking({ id }: { id: string }) {
   function save() {
     if (!booking) return;
     const text = [
-      t("Atlas Journeys — Reservation request"),
+      t("KraCar — Reservation request"),
       booking.id,
       `${t("Status")}: ${t(booking.status.replaceAll("_", " ").replace(/^./, (character) => character.toUpperCase()))}`,
       t(booking.listingName),

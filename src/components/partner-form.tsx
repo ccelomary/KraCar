@@ -74,7 +74,7 @@ export default function PartnerForm() {
             )}
           </p>
           <Link href="/" className="button">
-            {t("Back to Atlas")}
+            {t("Back to home")}
           </Link>
         </div>
       ) : (

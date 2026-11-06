@@ -4,6 +4,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { headers } from "next/headers";
 import { coreDb } from "./db";
 import { authorizedWorkspace } from "../workspace-auth";
+import { appOrigins } from "../app-origins";
 export function customerAuth() {
   return betterAuth({
     appName: "KraCar",
@@ -25,7 +26,7 @@ export function customerAuth() {
         });
       },
     },
-    trustedOrigins: process.env.APP_ORIGIN ? [process.env.APP_ORIGIN] : [],
+    trustedOrigins: appOrigins(),
   });
 }
 let auth: ReturnType<typeof customerAuth> | undefined;

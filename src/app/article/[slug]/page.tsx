@@ -11,7 +11,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const guide = guides.find((g) => g.slug === slug);
-  return localizeMetadata({ title: guide?.title || "Atlas travel notes" });
+  return localizeMetadata({ title: guide?.title || "KraCar travel notes" });
 }
 export default async function Article({
   params,
@@ -29,13 +29,13 @@ export default async function Article({
         className="public-container info-page article-page"
       >
         <nav className="breadcrumb" aria-label={t("Breadcrumb")}>
-          <Link href="/blog">{t("Atlas travel notes")}</Link>
+          <Link href="/blog">{t("KraCar travel notes")}</Link>
           <span aria-hidden="true">/</span>
           <span>{t(guide.title)}</span>
         </nav>
         <article>
           <header className="section-title">
-            <span className="eyebrow">{t("Atlas travel notes")}</span>
+            <span className="eyebrow">{t("KraCar travel notes")}</span>
             <h1>{t(guide.title)}</h1>
             <p>{t(guide.intro)}</p>
           </header>

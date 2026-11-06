@@ -559,7 +559,7 @@ export function BookingDetails({
       <div className="dialog-actions">
         <a
           className="button secondary"
-          href={`mailto:${b.email}?subject=${encodeURIComponent(t("Your Atlas reservation {0}", { "0": b.id }))}`}
+          href={`mailto:${b.email}?subject=${encodeURIComponent(t("Your KraCar reservation {0}", { "0": b.id }))}`}
         >
           <Mail aria-hidden="true" focusable="false" size={14} />
           {t("Contact traveler")}

@@ -10,7 +10,7 @@ export default async function NotFound() {
         {t("Let\u2019s get you back to something worth exploring.")}
       </p>
       <Link href="/" className="button">
-        {t("Back to Atlas")}
+        {t("Back to home")}
       </Link>
     </main>
   );

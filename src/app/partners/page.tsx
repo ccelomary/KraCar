@@ -12,7 +12,7 @@ import {
   Headphones,
 } from "lucide-react";
 export async function generateMetadata() {
-  return localizeMetadata({ title: "Grow with Atlas" });
+  return localizeMetadata({ title: "Grow with KraCar" });
 }
 export default async function Partners() {
   const t = await getTranslator();
@@ -41,7 +41,7 @@ export default async function Partners() {
             <div className="eyebrow">
               {t("Local businesses. Shared journeys.")}
             </div>
-            <h1>{t("Bring your business to Atlas")}</h1>
+            <h1>{t("Bring your business to KraCar")}</h1>
             <p>
               {t(
                 "Connect your local expertise with travelers exploring Morocco. Apply to offer car rentals or memorable local experiences.",
